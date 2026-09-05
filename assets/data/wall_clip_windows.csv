@@ -1,0 +1,20 @@
+clip_key,frame,source_recording,frame_time_s,start_s,end_s,note
+pick__tooth_brush,tooth_brush.jpg,tooth_brush.mkv,43.213,34.213,48.213,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+pick__whisk,whisk.jpg,yellow_whisk.mkv,28.459,19.459,33.459,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+place__pen_to_pen_holder,put_pen_in_cup.jpg,filmed-videos/atom - pen into cup.MP4,,1.0,24.0,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
+wipe__stain_with_sponge,wipes_water.jpg,wipes water.mkv,26.657,17.657,31.657,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+stack__cube_on_block,stack_cube.jpg,stack cube.webm,77.123,68.123,82.123,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+stack__cola_on_cola,stack_cola.jpg,stack cola.webm,23.993,14.993,28.993,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+pass__remote_ltor,pass_remote.jpg,pass remote control.mkv,49.896,40.896,54.896,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+pass__ball_rtol,pass_ball.jpg,filmed-videos/atom - pass ball.MP4,,1.0,43.1,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
+fold__towel_one_arm,fold_towel.jpg,fold tower.mkv,73.673,64.673,78.673,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+straighten__water_bottle,straighten_bottle.jpg,filmed-videos/atom - straigthen bottle.MP4,,5.0,42.2,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
+pour__sesame_to_plate,pour_sesame.jpg,pour seasame.mkv,50.268,41.268,55.268,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+pour__beans_to_water_cup,pour_beans.jpg,pour beans.mkv,115.556,106.556,118.056,end trimmed: human reset enters after the trial
+insert__flower_to_vase,insert_flower.jpg,insert flower.webm,36.907,27.907,41.907,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+insert__straw_to_cup,insert_straw.jpg,insert straw.webm,21.328,12.328,26.328,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+insert__book_out_of_shelf,take_out_book.jpg,take out book.mkv,151.647,142.647,156.647,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+separate__pen_cap_off,unscrew_pencap.jpg,unscrew_pencap.mkv,169.428,160.428,174.428,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+press__calculator_button,press_calculator.jpg,press calculator.mkv,60.212,51.212,61.712,end trimmed: human reset enters after the trial
+pull__tissue_from_bag,pull_tissue.jpg,pull_tissue.mkv,90.698,81.698,92.698,end trimmed: human reset enters after the trial
+stack__cup_on_cup,stack_cup.jpg,filmed-videos/atom - stack cup.MP4,,4.0,32.0,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
