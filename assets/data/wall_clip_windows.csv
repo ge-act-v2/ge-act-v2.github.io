@@ -1,20 +1,40 @@
-clip_key,frame,source_recording,frame_time_s,start_s,end_s,note
-pick__tooth_brush,tooth_brush.jpg,tooth_brush.mkv,43.213,34.213,48.213,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-pick__whisk,whisk.jpg,yellow_whisk.mkv,28.459,19.459,33.459,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-place__pen_to_pen_holder,put_pen_in_cup.jpg,filmed-videos/atom - pen into cup.MP4,,1.0,24.0,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
-wipe__stain_with_sponge,wipes_water.jpg,wipes water.mkv,26.657,17.657,31.657,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-stack__cube_on_block,stack_cube.jpg,stack cube.webm,77.123,68.123,82.123,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-stack__cola_on_cola,stack_cola.jpg,stack cola.webm,23.993,14.993,28.993,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-pass__remote_ltor,pass_remote.jpg,pass remote control.mkv,49.896,40.896,54.896,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-pass__ball_rtol,pass_ball.jpg,filmed-videos/atom - pass ball.MP4,,1.0,43.1,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
-fold__towel_one_arm,fold_towel.jpg,fold tower.mkv,73.673,64.673,78.673,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-straighten__water_bottle,straighten_bottle.jpg,filmed-videos/atom - straigthen bottle.MP4,,5.0,42.2,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
-pour__sesame_to_plate,pour_sesame.jpg,pour seasame.mkv,50.268,41.268,55.268,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-pour__beans_to_water_cup,pour_beans.jpg,pour beans.mkv,115.556,106.556,118.056,end trimmed: human reset enters after the trial
-insert__flower_to_vase,insert_flower.jpg,insert flower.webm,36.907,27.907,41.907,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-insert__straw_to_cup,insert_straw.jpg,insert straw.webm,21.328,12.328,26.328,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-insert__book_out_of_shelf,take_out_book.jpg,take out book.mkv,151.647,142.647,156.647,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-separate__pen_cap_off,unscrew_pencap.jpg,unscrew_pencap.mkv,169.428,160.428,174.428,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
-press__calculator_button,press_calculator.jpg,press calculator.mkv,60.212,51.212,61.712,end trimmed: human reset enters after the trial
-pull__tissue_from_bag,pull_tissue.jpg,pull_tissue.mkv,90.698,81.698,92.698,end trimmed: human reset enters after the trial
-stack__cup_on_cup,stack_cup.jpg,filmed-videos/atom - stack cup.MP4,,4.0,32.0,studio footage 1080p50 -> 1280x720@25; cut by _build/encode_filmed.py (motion-profile window)
+clip_key,embodiment,source_recording,start_s,end_s,rot,zoom,cx,cy,note
+pick__tooth_brush,G1-OP,tooth_brush.mkv,34.213,48.213,,,,,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+pick__whisk,G1-OP,yellow_whisk.mkv,19.459,33.459,,,,,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+stack__cola_on_cola,G1-OP,stack cola.webm,14.993,28.993,,,,,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+pass__remote_ltor,G1-OP,pass remote control.mkv,40.896,54.896,,,,,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+insert__flower_to_vase,G1-OP,insert flower.webm,27.907,41.907,,,,,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+insert__straw_to_cup,G1-OP,insert straw.webm,12.328,26.328,,,,,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+insert__book_out_of_shelf,G1-OP,take out book.mkv,142.647,156.647,,,,,first pass: frame time -9 s / +5 s; edit and re-run encode_wall_clips.py
+press__stapler,G1-OP,press stampler.mp4,0.0,16.271,1.5,0.65,0.4811,0.3386,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+insert__flower_to_vase,G2-90D,insert flower.mp4,0.0,13.734,-0.4,0.72,0.4756,0.421,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+stack__cube_on_block,G1-OP,atom - stack cube.MP4,0.0,34.2,0,0.85,0.5156,0.553,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+close__kettle_lid,G1-OP,close kettle.mkv,3.955,26.866,3.2,0.685,0.5415,0.4868,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+fold__towel_one_arm,G1-OP,fold tower.mkv,2.905,87.232,-1.2,0.725,0.3954,0.4863,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pass__ball_rtol,G1-OP,atom - pass ball.MP4,1.0,39.789,0,0.945,0.5172,0.4327,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+place__pen_to_pen_holder,G1-OP,atom - pen into cup.MP4,1.0,22.686,0,0.93,0.5616,0.476,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pour__beans_to_water_cup,G1-OP,pour beans.mkv,96.921,119.883,0,0.68,0.4847,0.5319,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pour__sesame_to_plate,G1-OP,pour seasame.mkv,7.869,59.021,0.4,0.73,0.4971,0.5304,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+press__calculator_button,G1-OP,press calculator.mkv,6.791,62.818,2.2,0.69,0.5432,0.5062,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pull__open_drawer,G1-OP,open drawer.mkv,4.379,33.862,3.2,0.695,0.5524,0.4878,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pull__tissue_from_bag,G1-OP,pull tissue.mkv,0.0,56.671,2.2,0.66,0.5575,0.5108,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+separate__paper_cups,G1-OP,separate cup.mkv,1.039,103.176,-1.2,0.745,0.3742,0.4918,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+separate__pen_cap_off,G1-OP,unscrew_pencap.mkv,144.481,170.592,1.4,0.715,0.5418,0.383,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+stack__cup_on_cup,G1-OP,stack cup.mkv,63.862,79.153,-0.3,0.72,0.4981,0.5364,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+straighten__water_bottle,G1-OP,atom - straigthen bottle.MP4,5.0,42.2,0,0.91,0.5222,0.4687,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+straighten__water_bottle_2,G1-OP,straighten bottle.mkv,102.731,178.605,0,0.735,0.4906,0.5362,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+wipe__plate_with_rag,G1-OP,wipe plate.mkv,5.021,29.122,1.1,0.705,0.4936,0.5282,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+wipe__stain_with_sponge,G1-OP,wipes water.mkv,8.668,41.639,1.2,0.6999,0.4866,0.5249,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+insert__straw_to_cup,G2-90D,insert straw.mp4,9.162,21.883,1,0.68,0.5094,0.4944,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pass__sponge_eraser_ltor,G2-90D,pass sponge.mp4,39.705,53.169,1,0.57,0.4803,0.2842,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pick__marker_pen_in_cup,G2-90D,pick pen 90d.mp4,0.32,37.073,-1,0.645,0.498,0.4441,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pick__tooth_brush,G2-90D,pick toothbrush.mp4,2.66,24.35,-0.9,0.67,0.5015,0.4397,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pick__towel_from_rod,G2-90D,pick towel.mp4,36.169,120.824,0,0.65,0.4921,0.2621,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pick__whisk,G2-90D,90d pick whisk.mp4,0.0,13.194,-1.2,0.655,0.4958,0.4393,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+place__mango_to_box,G2-90D,atom - mango into box.MP4,3.143,15.778,0,0.61,0.5021,0.693,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+pour__fruits_to_plate,G2-90D,pour fruit.mp4,97.532,109.087,-0.6,0.65,0.4878,0.451,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+press__stapler,G2-90D,press stampler.mp4,0.0,16.271,1.5,0.65,0.5056,0.4362,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+separate__pen_cap_off,G2-90D,uncap pen.mp4,75.073,87.943,1.4,0.605,0.4881,0.323,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+stack__cola_on_cola,G2-90D,stack cola.mp4,100.529,110.67,1.3,0.715,0.5185,0.501,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+stack__cube_on_block,G2-90D,atom - stack cube.MP4,0.0,34.2,0,0.85,0.5156,0.553,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py
+wipe__stain_with_sponge,G2-90D,wipe stain.mp4,158.801,171.997,1.5,0.645,0.482,0.4335,set in _build/picker_wall (wall.html); re-cut with encode_wall_v2.py

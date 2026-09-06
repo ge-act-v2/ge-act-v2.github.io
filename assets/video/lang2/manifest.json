@@ -1,0 +1,50 @@
+[
+ {
+  "slug": "lang2/pick_badminton",
+  "label": "badminton",
+  "source": "lang2 - badminton.MP4",
+  "start": 2.412,
+  "end": 16.062,
+  "len": 13.65
+ },
+ {
+  "slug": "lang2/pick_green_tape",
+  "label": "green tape",
+  "source": "lang2 - green tape.MP4",
+  "start": 3.646,
+  "end": 14.9,
+  "len": 11.25
+ },
+ {
+  "slug": "lang2/pick_screwdriver",
+  "label": "screwdriver",
+  "source": "lang2 - screwdriver.MP4",
+  "start": 6.218,
+  "end": 21.002,
+  "len": 14.78
+ },
+ {
+  "slug": "lang2/pick_toy_bear",
+  "label": "toy bear",
+  "source": "lang2 - toy bear + comb.MP4",
+  "start": 23.172,
+  "end": 29.955,
+  "len": 6.78
+ },
+ {
+  "slug": "lang2/pick_vr_controller",
+  "label": "vr controller",
+  "source": "lang2 - vr controller+tv controller.MP4",
+  "start": 0.744,
+  "end": 6.744,
+  "len": 6.0
+ },
+ {
+  "slug": "lang2/pick_tv_controller",
+  "label": "tv controller",
+  "source": "lang2 - vr controller+tv controller.MP4",
+  "start": 17.695,
+  "end": 26.258,
+  "len": 8.56
+ }
+]
