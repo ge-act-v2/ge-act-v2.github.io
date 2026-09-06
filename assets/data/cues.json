@@ -1,0 +1,29 @@
+{
+ "demos/fill_plate": [
+  {
+   "t": 0,
+   "text": "Pick up the apple and put it into the bowl.",
+   "rate": 3
+  },
+  {
+   "t": 21.0,
+   "text": "Pick up the mango and put it into the bowl.",
+   "rate": 3
+  },
+  {
+   "t": 40.0,
+   "text": "Pick up the snack bag and put it on the tray.",
+   "rate": 3
+  },
+  {
+   "t": 51.0,
+   "text": "Pick up the snack bag and put it on the tray.",
+   "rate": 5
+  },
+  {
+   "t": 66.0,
+   "text": "Pick up the bottle and put it on the tray.",
+   "rate": 3
+  }
+ ]
+}

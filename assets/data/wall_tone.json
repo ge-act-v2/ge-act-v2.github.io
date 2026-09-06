@@ -1,0 +1,122 @@
+{
+ "wall/close__kettle_lid": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__close__kettle_lid__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/fold__towel_one_arm": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__fold__towel_one_arm__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/pour__beans_to_water_cup": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__pour__beans_to_water_cup__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/pour__sesame_to_plate": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__pour__sesame_to_plate__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/pull__open_drawer": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__pull__open_drawer__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/pull__tissue_from_bag": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__pull__tissue_from_bag__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/separate__paper_cups": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__separate__paper_cups__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/separate__pen_cap_off": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__separate__pen_cap_off__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/stack__cup_on_cup": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__stack__cup_on_cup__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/straighten__water_bottle_2": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__straighten__water_bottle_2__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/wipe__plate_with_rag": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__wipe__plate_with_rag__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/wipe__stain_with_sponge": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__wipe__stain_with_sponge__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall/stack__cola_on_cola": {
+  "scene": "g1_white_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall__stack__cola_on_cola__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/pick__marker_pen_in_cup": {
+  "scene": "g2_wood_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__pick__marker_pen_in_cup__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/pick__tooth_brush": {
+  "scene": "g2_wood_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__pick__tooth_brush__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/pick__whisk": {
+  "scene": "g2_wood_lab",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__pick__whisk__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/insert__straw_to_cup": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__insert__straw_to_cup__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/pass__sponge_eraser_ltor": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__pass__sponge_eraser_ltor__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/pick__towel_from_rod": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__pick__towel_from_rod__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/pour__fruits_to_plate": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__pour__fruits_to_plate__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/press__stapler": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__press__stapler__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/separate__pen_cap_off": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__separate__pen_cap_off__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/stack__cola_on_cola": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__stack__cola_on_cola__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ },
+ "wall_g2/wipe__stain_with_sponge": {
+  "scene": "g2_grey_studio",
+  "grade": "np_punch",
+  "vf": "lut3d=file=/Users/agiuser/Documents/Ge-Act-2-Public/Paper demo website planning/_build/picker_wall/luts/wall_g2__wipe__stain_with_sponge__np_punch.cube:interp=tetrahedral,eq=contrast=1.03:saturation=1.0"
+ }
+}

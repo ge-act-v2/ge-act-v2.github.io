@@ -1,13 +1,5 @@
 [
  {
-  "slug": "lang2/pick_badminton",
-  "label": "badminton",
-  "source": "lang2 - badminton.MP4",
-  "start": 2.412,
-  "end": 16.062,
-  "len": 13.65
- },
- {
   "slug": "lang2/pick_green_tape",
   "label": "green tape",
   "source": "lang2 - green tape.MP4",
@@ -46,5 +38,13 @@
   "start": 17.695,
   "end": 26.258,
   "len": 8.56
+ },
+ {
+  "slug": "lang2/pick_comb",
+  "label": "comb",
+  "source": "1080p_b6cb79632mc68209d856306467681658_ts.MOV",
+  "start": 41.0,
+  "end": 49.0,
+  "len": 8.0
  }
 ]
