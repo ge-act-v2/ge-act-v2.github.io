@@ -4675,7 +4675,7 @@ class Component extends DCLogic {
   playMuted = (e) => { const el = e.currentTarget; el.muted = true; const p = el.play(); if (p && p.catch) p.catch(() => {}); };
   openLight = (slug) => () => this.setState({ light: slug, lightCue: 0 });
   // project film: two full cuts of the same film, chosen by the page language (EN -> English subtitles, \u4e2d -> English + Chinese)
-  filmSrc() { return 'https://ge-act-v2.github.io/assets/video/' + (this.state.lang === 'zh' ? 'pr_film_zh' : 'pr_film') + '.mp4' + this.assetVer('pr_film'); }
+  filmSrc() { return this.FILM_BASE + (this.state.lang === 'zh' ? 'pr_film_zh' : 'pr_film') + '.mp4' + this.assetVer('pr_film'); }
   // hero film controls: autoplay muted + loop; the bar under the picture toggles play, seeks, mutes, goes full screen (native controls while full screen)
   filmEl = () => document.querySelector('[data-r="film-video"]');
   mmss(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
@@ -4706,6 +4706,7 @@ class Component extends DCLogic {
   rollLeave = (key) => (e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.pause(); try { v.currentTime = 0; } catch (err) {} } if (this.state.rollHover === key) this.setState({ rollHover: null }); };   // un-hover: back to the first frame
   // wall clips are re-cut under the same file names (picker_wall); bump this when they change so browsers refetch
   ASSET_VER = '20260907z';
+  FILM_BASE = 'https://pub-69e403b6390243e0b653e9664adf859c.r2.dev/'; /* hero film host: keep relative for GitHub; set to the Cloudflare R2 public URL with a trailing slash (e.g. 'https://media.example.com/') to serve pr_film.mp4 / pr_film_zh.mp4 from R2 */
   assetVer(slug) { return '?v=' + this.ASSET_VER; }   // every clip: re-cuts keep their file name, so the tag is what busts caches
   speedLabel(f) { return (Math.abs(f - Math.round(f)) < 0.01 ? String(Math.round(f)) : f.toFixed(1)) + '\u00d7'; }
   // one chip rule for every video: bottom-left row = robot · playback speed · AUTONOMOUS · ZERO-SHOT (top-left stays free for content)
