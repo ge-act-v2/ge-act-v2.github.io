@@ -4784,6 +4784,10 @@ class Component extends DCLogic {
     }, { rootMargin: '900px 0px' }) : null;
     this.scanLazy = () => { document.querySelectorAll('video[data-lazy]').forEach((el) => { if (el.__lazy) return; el.__lazy = true; if (el.getAttribute('data-lazy') === 'warm') { if (this.warmIO) this.warmIO.observe(el); else warmEl(el); } else if (this.lazyIO) this.lazyIO.observe(el); else startEl(el); }); };
     this.scanLazy();
+    /* hero film autoplay: Safari/iOS require the muted ATTRIBUTE (React only sets the property) and iOS never fires loadeddata before play, so arm the element here and nudge again on the first gesture */
+    const filmKick = () => { const fv = document.querySelector('video[data-r="film-video"]'); if (!fv) return false; if (this.state.filmMuted !== false) { fv.defaultMuted = true; fv.muted = true; fv.setAttribute("muted", ""); } if (fv.paused && this._filmWasPlaying !== false) { const r = fv.getBoundingClientRect(); if (r.bottom > 0 && r.top < window.innerHeight) { const fp = fv.play(); if (fp && fp.catch) fp.catch(() => {}); } } return true; };
+    { let k = 0; const fk = setInterval(() => { if (filmKick() || ++k > 20) clearInterval(fk); }, 250); }
+    ["pointerdown", "touchstart", "keydown"].forEach((e) => window.addEventListener(e, filmKick, { passive: true }));
     /* deep links (#coae, #kaso, ...): the browser jumps before this page hydrates, so re-run the jump once the target exists */
     const hashId = decodeURIComponent((location.hash || "").slice(1));
     if (hashId) {
