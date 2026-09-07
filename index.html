@@ -3205,6 +3205,8 @@
   [data-r="lh-panel"][data-merged="1"] [data-r="lh-steps"] { max-height: 0 !important; transition: max-height 700ms ease 480ms !important; }
     [data-r="lh-panel"][data-merged="1"] [data-r="lh-goal"] { box-shadow: 0 0 0 4px oklch(0.93 0.035 262), 0 0 0 8px oklch(0.968 0.020 262); }
   @media (max-width: 960px) { [data-r="lh"] { grid-template-columns: minmax(0, 1fr) !important; } }
+    @media (max-width: 900px) { [data-r="hero-stats"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; row-gap: 18px; } [data-r="hero-tile"]:nth-child(3) { border-left: 0 !important; } }
+    @media (max-width: 520px) { [data-r="hero-stats"] { grid-template-columns: minmax(0, 1fr) !important; } [data-r="hero-tile"] { border-left: 0 !important; padding-left: 0 !important; } }
     @media (max-width: 720px) { [data-r="cards3"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px 10px !important; } [data-r="cards2"][data-cols="3"] { grid-template-columns: minmax(0, 1fr) !important; } }   /* object tiles + bias cards keep 3 columns down to 720 px */   /* narrow tablets: panel under the video, the goal card needs the width */
   [data-r="strip"]::-webkit-scrollbar { height: 6px; } [data-r="strip"]::-webkit-scrollbar-thumb { background: oklch(0.86 0.008 250); border-radius: 3px; }
   @media (max-width: 1100px) { [data-r="strip"][data-open="1"] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
@@ -3385,6 +3387,33 @@
     <button type="button" onClick="{{ onFilmFull }}" aria-label="Full screen" style="flex: none; width: 34px; height: 34px; border-radius: 8px; border: 0; background: transparent; color: oklch(0.985 0.002 250); display: flex; align-items: center; justify-content: center; cursor: pointer;" style-hover="background: oklch(0.99 0.002 250 / 0.16);"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"></path></svg></button>
   </div>
 </div>
+    </div>
+  
+    <div data-r="hero-stats" style="max-width: 1000px; margin: 22px auto 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: start; background: oklch(0.975 0.003 250); border-radius: 16px; padding: 6px;">
+        <div data-r="hero-tile" style="padding: 18px 13px 16px; min-width: 0;">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.500 0.195 265); margin: 0 0 10px; white-space: nowrap;"><span lang="en">Model</span><span lang="zh">模型</span></div>
+          <div style="font-size: 14px; line-height: 1.5; color: oklch(0.215 0.008 255); font-weight: 600; white-space: nowrap;"><span lang="en">CoAE · SVP · IDM</span><span lang="zh">CoAE · SVP · IDM</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">Separately pretrained components</span><span lang="zh">各模块独立预训练</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">Aligned by KASO in co-training</span><span lang="zh">协同训练中由 KASO 对齐</span></div>
+        </div>
+        <div data-r="hero-tile" style="padding: 18px 13px 16px; min-width: 0; border-left: 1px solid oklch(0.905 0.004 250);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.500 0.195 265); margin: 0 0 10px; white-space: nowrap;"><span lang="en">Data Scaling</span><span lang="zh">数据规模扩展</span></div>
+          <div style="font-size: 14px; line-height: 1.5; color: oklch(0.215 0.008 255); font-weight: 600; white-space: nowrap;"><span lang="en">300 → 30,000 hours</span><span lang="zh">300 → 30,000 小时</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">Four data scales</span><span lang="zh">四个数据规模</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">300 · 1,200 · 5,000 · 30,000 h</span><span lang="zh">300 · 1,200 · 5,000 · 30,000 小时</span></div>
+        </div>
+        <div data-r="hero-tile" style="padding: 18px 13px 16px; min-width: 0; border-left: 1px solid oklch(0.905 0.004 250);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.500 0.195 265); margin: 0 0 10px; white-space: nowrap;"><span lang="en">Evaluation</span><span lang="zh">评估</span></div>
+          <div style="font-size: 14px; line-height: 1.5; color: oklch(0.215 0.008 255); font-weight: 600; white-space: nowrap;"><span lang="en">Zero-shot OOD · two robots</span><span lang="zh">零样本分布外 · 两台机器人</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">100 atomic tasks, 20 skill groups</span><span lang="zh">20 类技能下的 100 项原子任务</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">Fine-grained instruction following</span><span lang="zh">细粒度指令跟随</span></div>
+        </div>
+        <div data-r="hero-tile" style="padding: 18px 13px 16px; min-width: 0; border-left: 1px solid oklch(0.905 0.004 250);">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(0.500 0.195 265); margin: 0 0 10px; white-space: nowrap;"><span lang="en">Deployment</span><span lang="zh">部署</span></div>
+          <div style="font-size: 14px; line-height: 1.5; color: oklch(0.215 0.008 255); font-weight: 600; white-space: nowrap;"><span lang="en">104 ms per action chunk</span><span lang="zh">每段动作 104 ms</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">Full pipeline on a single RTX 5090</span><span lang="zh">单张 RTX 5090 运行完整流程</span></div>
+          <div style="font-size: 13px; line-height: 1.6; color: oklch(0.42 0.008 255);"><span lang="en">52 dense actions at 30 Hz</span><span lang="zh">30 Hz 下 52 步稠密动作</span></div>
+        </div>
     </div>
   </section>
 
@@ -3796,6 +3825,7 @@
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">ARCHITECTURE</span><span lang="zh">模型架构</span></div>
       <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">GE-Act 2.0 Architecture</span><span lang="zh">GE-Act 2.0 架构</span></h2>
 <p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">GE-Act 2.0 turns an instruction into action through three components in sequence. The control-oriented autoencoder (CoAE) maps camera observations into a compact latent space. The single-step visual planner (SVP) predicts future states in that space, conditioned on the instruction and current observation. An inverse dynamics model (IDM) reads the predicted future together with the current latents and proprioception to produce an action chunk.</span><span lang="zh">GE-Act 2.0 通过三个依次连接的模块将指令转化为动作。面向控制的自编码器（CoAE）将相机观测映射到紧凑的潜在空间；单步视觉规划器（SVP）以当前观测和指令为条件，在该空间中预测未来状态；逆动力学模型（IDM）结合预测的未来、当前视觉潜变量与本体感知信息，生成动作片段。</span></p><p style="margin: 0 0 48px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">The future sequence covers two timescales: dense visual states over the immediate action horizon and sparse states extending to the end of the task. The IDM uses the full sequence for context, but the robot executes only the dense action chunk. Sparse far-horizon action predictions provide auxiliary supervision during training. This keeps the immediate control output connected to the visual outcome of the broader task.</span><span lang="zh">未来状态序列覆盖两种时间尺度：近期动作执行范围内的密集视觉状态，以及延伸至任务结束的稀疏视觉状态。IDM 使用完整序列提供的上下文，但机器人仅执行密集动作片段。远期稀疏动作预测在训练中提供辅助监督，将即时控制与整个任务的视觉结果联系起来。</span></p>
+      <p style="margin: 0 0 48px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en"><strong>Deployment.</strong> The full pipeline, from three camera frames to a chunk of 52 actions (1.7 s of motion at 30 Hz), runs in <strong>104 ms on a single RTX 5090</strong>: one CoAE encode, one MeanFlow pass in SVP, and five denoising steps in the IDM.</span><span lang="zh"><strong>部署。</strong>从三路相机画面到一段 52 步动作（30 Hz 下约 1.7 s 的运动），完整流程在<strong>单张 RTX 5090 上耗时 104 ms</strong>：CoAE 编码一次、SVP 的 MeanFlow 单步生成一次、IDM 去噪五步。</span></p>
                   <div style="background: oklch(0.988 0.003 250); background-image: radial-gradient(oklch(0.918 0.006 250) 1.1px, transparent 1.1px); background-size: 20px 20px; border-radius: 18px; padding: 28px 32px 34px; overflow-x: auto; width: min(1000px, calc(100vw - 96px)); position: relative; left: 50%; transform: translateX(-50%);" data-r="arch" onMouseLeave="{{ clearStage }}">
         <div style="min-width: 936px; display: flex; flex-direction: column;">
 
