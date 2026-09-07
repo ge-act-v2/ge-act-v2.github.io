@@ -3298,6 +3298,7 @@
   @keyframes kasoRing { 0% { transform: scale(1); opacity: 0.85; } 100% { transform: scale(1.07); opacity: 0; } }
   /* hero film: the control bar overlays the picture and shows on hover, on keyboard focus, or while paused; touch screens keep it visible */
   [data-r="film-bar"] { opacity: 0; transition: opacity 0.22s ease; }
+    [data-r="film-play"][data-on="1"] { opacity: 1 !important; }
   [data-r="film"]:hover [data-r="film-bar"], [data-r="film"]:focus-within [data-r="film-bar"], [data-r="film-bar"][data-paused="1"] { opacity: 1; }
   @media (hover: none) { [data-r="film-bar"] { opacity: 1; } }
 </style>
@@ -3362,8 +3363,9 @@
   <section data-r="vpad" style="padding: 60px 48px 0;">
     <div style="max-width: 1000px; margin: 0 auto;">
 <div data-r="film" style="position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 16 / 9; background: oklch(0.12 0.008 255); box-shadow: 0 30px 70px -34px oklch(0.4 0.04 255 / 0.34);">
-  <video data-r="film-video" src="{{ filmSrc }}" poster="{{ filmPoster }}" muted="{{ filmMuted }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" autoPlay="{{ true }}" onLoadedData="{{ onFilmReady }}" onTimeUpdate="{{ onFilmTime }}" onPlay="{{ onFilmPlay }}" onPause="{{ onFilmPause }}" onVolumeChange="{{ onFilmVol }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+  <video data-r="film-video" src="{{ filmSrc }}" poster="{{ filmPoster }}" muted="{{ filmMuted }}" playsInline="{{ true }}" preload="metadata" onLoadedMetadata="{{ onFilmReady }}" onTimeUpdate="{{ onFilmTime }}" onPlay="{{ onFilmPlay }}" onPause="{{ onFilmPause }}" onVolumeChange="{{ onFilmVol }}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;"></video>
   <div onClick="{{ onFilmToggle }}" aria-hidden="true" style="position: absolute; inset: 0; cursor: pointer;"></div>
+  <div data-r="film-play" data-on="{{ filmPlayOverlay }}" aria-hidden="true" style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0; transition: opacity 220ms ease;"><span style="width: 84px; height: 84px; border-radius: 999px; background: oklch(0.993 0.002 250 / 0.92); box-shadow: 0 18px 40px -18px oklch(0.2 0.02 255 / 0.6); display: flex; align-items: center; justify-content: center;"><svg viewBox="0 0 24 24" width="34" height="34" fill="oklch(0.465 0.180 302)" aria-hidden="true"><path d="M9 5.4v13.2L19.5 12z"></path></svg></span></div>
   <div data-r="film-bar" data-paused="{{ filmPausedFlag }}" onClick="{{ stopClick }}" style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 40px 14px 12px; background: linear-gradient(to top, oklch(0.12 0.008 255 / 0.78), oklch(0.12 0.008 255 / 0));">
     <button type="button" onClick="{{ onFilmToggle }}" aria-label="{{ filmPlayLabel }}" style="flex: none; width: 36px; height: 36px; border-radius: 9px; border: 0; background: oklch(0.465 0.180 302); color: oklch(0.993 0.002 250); display: flex; align-items: center; justify-content: center; cursor: pointer;" style-hover="background: oklch(0.405 0.175 302);">
       <sc-if value="{{ filmPlaying }}" hint-placeholder-val="{{ true }}"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z"></path></svg></sc-if>
@@ -4337,7 +4339,7 @@ const ZH_BODY = {
 };
 
 class Component extends DCLogic {
-  state = { n: null, stage: 0, phase: 0, cands: null, playing: true, picked: 'pick/tooth brush', sort: 'volume', fam: 0, demo: 0, cmd: 0, lang: 'en', copied: false, motionPaused: false, scaleView: 'groups', panelsOpen: false, langPick: 'pick_blue_cup', demoPick: 0, demoCue: 0, demoFlash: false, vFail: {}, vReady: {}, light: null, lightCue: 0, confCue: {}, filmMuted: true, filmPlaying: true, filmT: 0, filmDur: 0, rollOpen: false, rollHover: null };
+  state = { n: null, stage: 0, phase: 0, cands: null, playing: true, picked: 'pick/tooth brush', sort: 'volume', fam: 0, demo: 0, cmd: 0, lang: 'en', copied: false, motionPaused: false, scaleView: 'groups', panelsOpen: false, langPick: 'pick_blue_cup', demoPick: 0, demoCue: 0, demoFlash: false, vFail: {}, vReady: {}, light: null, lightCue: 0, confCue: {}, filmMuted: false, filmPlaying: false, filmT: 0, filmDur: 0, rollOpen: false, rollHover: null };
 
   POOLS = ['0.3k', '1.2k', '5k', '30k'];
 
@@ -4680,11 +4682,10 @@ class Component extends DCLogic {
   filmEl = () => document.querySelector('[data-r="film-video"]');
   mmss(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
   onFilmReady = (e) => {
-    const v = e.currentTarget; v.muted = !!this.state.filmMuted;
-    const p = v.play(); if (p && p.catch) p.catch(() => {});
-    this.setState({ filmT: 0, filmDur: v.duration || 0, filmPlaying: !v.paused });
+      const v = e.currentTarget; v.muted = !!this.state.filmMuted;
+      this.setState({ filmT: 0, filmDur: v.duration || 0, filmPlaying: !v.paused });
     if (!this.filmIO && 'IntersectionObserver' in window) {   // off screen: pause; back on screen: resume unless the reader paused it
-      this.filmIO = new IntersectionObserver((en) => { en.forEach((x) => { if (x.isIntersecting) { if (this._filmWasPlaying !== false && v.paused) { const q = v.play(); if (q && q.catch) q.catch(() => {}); } } else { this._filmWasPlaying = !v.paused; if (!v.paused) v.pause(); } }); }, { rootMargin: '120px 0px' });
+      this.filmIO = new IntersectionObserver((en) => { en.forEach((x) => { if (x.isIntersecting) { if (this._filmWasPlaying === true && v.paused) { const q = v.play(); if (q && q.catch) q.catch(() => {}); } } else { this._filmWasPlaying = !v.paused; if (!v.paused) v.pause(); } }); }, { rootMargin: '120px 0px' });
       this.filmIO.observe(v);
     }
   };
@@ -4784,10 +4785,6 @@ class Component extends DCLogic {
     }, { rootMargin: '900px 0px' }) : null;
     this.scanLazy = () => { document.querySelectorAll('video[data-lazy]').forEach((el) => { if (el.__lazy) return; el.__lazy = true; if (el.getAttribute('data-lazy') === 'warm') { if (this.warmIO) this.warmIO.observe(el); else warmEl(el); } else if (this.lazyIO) this.lazyIO.observe(el); else startEl(el); }); };
     this.scanLazy();
-    /* hero film autoplay: Safari/iOS require the muted ATTRIBUTE (React only sets the property) and iOS never fires loadeddata before play, so arm the element here and nudge again on the first gesture */
-    const filmKick = () => { const fv = document.querySelector('video[data-r="film-video"]'); if (!fv) return false; if (this.state.filmMuted !== false) { fv.defaultMuted = true; fv.muted = true; fv.setAttribute("muted", ""); } if (fv.paused && this._filmWasPlaying !== false) { const r = fv.getBoundingClientRect(); if (r.bottom > 0 && r.top < window.innerHeight) { const fp = fv.play(); if (fp && fp.catch) fp.catch(() => {}); } } return true; };
-    { let k = 0; const fk = setInterval(() => { if (filmKick() || ++k > 20) clearInterval(fk); }, 250); }
-    ["pointerdown", "touchstart", "keydown"].forEach((e) => window.addEventListener(e, filmKick, { passive: true }));
     /* deep links (#coae, #kaso, ...): the browser jumps before this page hydrates, so re-run the jump once the target exists */
     const hashId = decodeURIComponent((location.hash || "").slice(1));
     if (hashId) {
@@ -5146,8 +5143,8 @@ class Component extends DCLogic {
       motionState: this.state.motionPaused ? 'paused' : 'playing',
       motionLabel: this.state.motionPaused ? 'Play motion' : 'Pause motion',
       onToggleMotion: () => this.setState({ motionPaused: !this.state.motionPaused, playing: this.state.motionPaused }),
-      filmSrc: this.filmSrc(),
-      filmPoster: 'https://ge-act-v2.github.io/assets/video/pr_film.jpg',
+      filmPlayOverlay: this.state.filmPlaying ? '' : '1', filmSrc: this.filmSrc(),
+      filmPoster: 'https://ge-act-v2.github.io/assets/video/pr_film.jpg' + this.assetVer('pr_film'),
       filmMuted: !!this.state.filmMuted,
       filmPlaying: !!this.state.filmPlaying,
       filmPausedFlag: this.state.filmPlaying ? '0' : '1',
