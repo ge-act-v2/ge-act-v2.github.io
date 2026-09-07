@@ -3191,7 +3191,8 @@
   [data-r="topnav"] { display: none !important; }
   [data-r="topnav"]::-webkit-scrollbar { display: none; }
   @media (max-width: 1479px) { [data-r="topnav"][data-show="1"] { display: flex !important; } }
-  @media (max-width: 1479px) { section[id], [id="task-wall"], [id="svp"] { scroll-margin-top: 104px; } }   /* anchors land below the bar */
+  section[id], [id="task-wall"], [id="svp"], [id="wall"] { scroll-margin-top: 90px; }
+    @media (max-width: 1479px) { section[id], [id="task-wall"], [id="svp"], [id="wall"] { scroll-margin-top: 104px; } }   /* anchors land below the bar */
   @media (min-width: 900px) { [data-r="topnav"] { overflow: visible !important; } }   /* room for the Method hover menu; below 900 px the bar scrolls sideways instead */
   [data-r="topnav"] a:hover { color: oklch(0.215 0.008 255) !important; }
   [data-r="topnav"] a[data-on="1"] { color: oklch(0.500 0.195 265) !important; background: oklch(0.968 0.020 262); }
@@ -3393,7 +3394,7 @@
 
 
 
-  <section id="pretraining" style="padding: 120px 48px 0;">
+  <section id="data-utilization" style="padding: 120px 48px 0;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">DATA UTILIZATION</span><span lang="zh">数据利用</span></div>
       <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">Learning visual prediction and action from complementary data</span><span lang="zh">从互补数据中学习视觉预测与动作生成</span></h2>
@@ -3420,7 +3421,7 @@
 
 
 
-  <section id="results" style="margin-top: 120px; background: oklch(0.968 0.004 250); padding: 120px 48px 130px;">
+  <section id="data-scaling" style="margin-top: 120px; background: oklch(0.968 0.004 250); padding: 120px 48px 130px;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">DATA SCALING</span><span lang="zh">数据规模扩展</span></div>
       <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">Scaling Manipulation Skills</span><span lang="zh">操作技能随数据规模提升</span></h2>
@@ -3621,7 +3622,7 @@
 
   
 
-  <section id="language" style="padding: 130px 48px 0;">
+  <section id="instruction-following" style="padding: 130px 48px 0;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">INSTRUCTION FOLLOWING</span><span lang="zh">指令跟随</span></div>
       <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">Following Language Instructions</span><span lang="zh">遵循语言指令</span></h2>
@@ -3900,7 +3901,7 @@
     </div>
   </section>
 
-  <section id="uae" style="padding: 130px 48px 0;">
+  <section id="coae" style="padding: 130px 48px 0;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">CoAE · CONTROL-ORIENTED AUTOENCODER</span><span lang="zh">CoAE · 面向控制的自编码器</span></div>
       <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">A Control-Oriented Latent Space</span><span lang="zh">面向控制的潜在空间</span></h2>
@@ -3919,7 +3920,7 @@
             <div style="grid-column: 2; grid-row: 1 / 5; align-self: center;"><div style="display: flex; align-items: center; min-width: 0;"><div style="flex: 1; height: 2px; background: oklch(0.545 0.170 300);"></div><div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid oklch(0.545 0.170 300);"></div></div></div>
             <div style="grid-column: 3; grid-row: 1 / 5; background: oklch(0.996 0.002 250); border-radius: 9px; padding: 13px 14px 12px; box-shadow: 3px 3px 0 oklch(0.902 0.012 255); display: flex; flex-direction: column; gap: 5px; min-width: 0;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: oklch(0.500 0.160 258); white-space: nowrap;">ENCODER</span><span style="font-size: 15px; font-weight: 600; letter-spacing: -0.012em; line-height: 1.25;">CoAE encoder</span></div>
             <div style="grid-column: 4; grid-row: 1 / 5; align-self: center;"><div style="display: flex; align-items: center; min-width: 0;"><div style="flex: 1; height: 2px; background: oklch(0.545 0.170 300);"></div><div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid oklch(0.545 0.170 300);"></div></div></div>
-            <div style="grid-column: 5; grid-row: 1 / 5; background: oklch(0.996 0.002 250); border-radius: 9px; padding: 13px 14px 12px; box-shadow: 3px 3px 0 oklch(0.902 0.012 255); display: flex; flex-direction: column; gap: 5px; min-width: 0;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: oklch(0.500 0.160 258); white-space: nowrap;">LATENT</span><span style="font-size: 15px; font-weight: 600; letter-spacing: -0.012em; line-height: 1.25;">z · 4 × 6 × 512</span><span style="display: grid; grid-template-columns: repeat(6, 7px); gap: 3px; margin-top: 3px;"><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span></span><span style=" font-size: 12px; line-height: 1.4; color: oklch(0.50 0.008 255);">24 tokens per frame</span></div>
+            <div style="grid-column: 5; grid-row: 1 / 5; background: oklch(0.996 0.002 250); border-radius: 9px; padding: 13px 14px 12px; box-shadow: 3px 3px 0 oklch(0.902 0.012 255); display: flex; flex-direction: column; gap: 5px; min-width: 0;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: oklch(0.500 0.160 258); white-space: nowrap;">LATENT</span><span style="font-size: 15px; font-weight: 600; letter-spacing: -0.012em; line-height: 1.25;">z · 512 channels</span><span style="display: grid; grid-template-columns: repeat(6, 7px); gap: 3px; margin-top: 3px;"><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span><span style="width: 7px; height: 7px; border-radius: 2px; background: oklch(0.615 0.150 260);"></span></span><span style=" font-size: 12px; line-height: 1.4; color: oklch(0.50 0.008 255);">64 × 64 compression</span></div>
             <div style="grid-column: 6; grid-row: 1 / 5; align-self: stretch; position: relative;"><div style="position: absolute; left: 0; top: 50%; width: 16px; height: 2px; margin-top: -1px; background: oklch(0.545 0.170 300);"></div><div style="position: absolute; left: 14px; top: 36px; bottom: 36px; width: 2px; background: oklch(0.545 0.170 300);"></div></div>
                         <div style="padding-left: 14px; grid-column: 6; grid-row: 1; align-self: center;"><div style="display: flex; align-items: center; min-width: 0;"><div style="flex: 1; height: 2px; background: oklch(0.545 0.170 300);"></div><div style="width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; border-left: 7px solid oklch(0.545 0.170 300);"></div></div></div>
             <div style="grid-column: 7; grid-row: 1; background: oklch(0.996 0.002 250); border-radius: 9px; padding: 13px 14px 12px; box-shadow: 3px 3px 0 oklch(0.902 0.012 255); display: flex; flex-direction: column; gap: 5px; min-width: 0; min-height: 72px; box-sizing: border-box;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: oklch(0.500 0.160 258); white-space: nowrap;">PIXELS</span><span style="font-size: 15px; font-weight: 600; letter-spacing: -0.012em; line-height: 1.25;">Reconstruction decoder</span><span style=" font-size: 12px; line-height: 1.4; color: oklch(0.50 0.008 255);">pixel · perceptual · adversarial</span></div>
@@ -3939,7 +3940,7 @@
             <div style="grid-column: 9; grid-row: 4; background: oklch(0.996 0.002 250); border-radius: 9px; padding: 13px 14px 12px; border: 1.5px dashed oklch(0.82 0.012 255); display: flex; flex-direction: column; gap: 5px; min-width: 0; min-height: 72px; box-sizing: border-box;"><span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.12em; color: oklch(0.545 0.008 255); white-space: nowrap;">FROZEN TEACHER</span><span style="font-size: 15px; font-weight: 600; letter-spacing: -0.012em; line-height: 1.25;">DINOv3</span><span style=" font-size: 12px; line-height: 1.4; color: oklch(0.50 0.008 255);">dense structure</span></div>
           </div>
         </div>
-        <div style="margin-top: 12px; font-size: 14px; color: oklch(0.56 0.008 255); line-height: 1.6;"><span lang="en">The encoder maps each frame to a 4×6 grid of 512-channel latents. A reconstruction decoder supplies pixel-level supervision, while three alignment heads match frozen-teacher features for semantics, motion and dense structure.</span><span lang="zh">编码器将每帧映射为 4 × 6 的潜变量网格，每个位置包含 512 个通道。重建解码器提供像素级监督，三个对齐头分别匹配冻结教师模型的语义、运动和密集结构特征。</span></div>
+        <div style="margin-top: 12px; font-size: 14px; color: oklch(0.56 0.008 255); line-height: 1.6;"><span lang="en">The encoder maps each frame to a 4 × 6 grid of 512-channel latents, one token per 64 × 64 pixels. A reconstruction decoder supplies pixel-level supervision, while three alignment heads match frozen-teacher features for semantics, motion and dense structure.</span><span lang="zh">编码器将每帧映射为 4 × 6 的潜变量网格，每个位置包含 512 个通道，每个 token 对应 64 × 64 像素区域。重建解码器提供像素级监督，三个对齐头分别匹配冻结教师模型的语义、运动和密集结构特征。</span></div>
       </div>
       <div style="margin-top: 36px;"><p style="margin: 0 0 0px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">We evaluate the frozen representation with identical probes across encoders. CoAE retains useful action information with one-sixteenth of the tokens used by DINOv3 and V-JEPA 2.1, although its action-recovery error is 13–31% higher. In the simulation caption-matching probe, CoAE achieves 97.95% accuracy. These probes test what the latent space preserves; they are separate from the on-robot task evaluation and do not supply training gradients.</span><span lang="zh">我们使用相同的探针设置评估各个冻结的视觉编码器。CoAE 使用的 token 数仅为 DINOv3 和 V-JEPA 2.1 的十六分之一，同时保留了有效的动作信息，其动作恢复误差比二者高 13–31%。在仿真场景的描述匹配探针中，CoAE 达到 <strong>97.95% 的准确率</strong>。这些探针用于检验潜在空间保留的信息，独立于真实机器人的任务评估，也不向被评估的表征提供训练梯度。</span></p></div>
     </div>
@@ -3991,7 +3992,7 @@
     <div style="max-width: 1000px; margin: 0 auto;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">THE VALIDITY GAP · KASO</span><span lang="zh">KASO · 有效性缺口</span></div>
       <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">Aligning Visual Futures with Action Supervision</span><span lang="zh">将未来视觉预测与动作监督对齐</span></h2>
-<p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">A correct visual prediction is not automatically compatible with a recorded action. Given the same scene and instruction, a robot may complete a task in several valid ways. A generated future may depict one completion while the demonstration records another. Training the IDM on that future with the recorded action asks it to learn from a mismatched pair.</span><span lang="zh">正确的视觉预测并不一定与记录的动作相容。面对相同场景和指令，机器人可能以多种有效方式完成任务；生成的未来状态可能对应其中一种，而示范记录的是另一种。将这样的未来预测与记录动作配对训练，会让 IDM 接收到不匹配的监督。</span></p><p style="margin: 0 0 48px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">This supervision mismatch is the validity gap. Improving visual plausibility alone does not ensure that an independently generated future describes the behavior in the recording. Knowledge-aligned selective optimization (KASO) addresses the connection directly: it generates several candidate futures and selects those whose implied actions are compatible with the recorded behavior.</span><span lang="zh">我们将这种监督不匹配称为“有效性缺口”。仅提高视觉预测的真实性，并不能保证独立生成的未来状态与记录中的行为一致。知识对齐选择性优化（KASO）直接处理这一问题：生成多个候选未来，并选择其中所隐含动作与记录行为相容的候选。</span></p>
+<p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">A correct visual prediction is not automatically compatible with a recorded action. Given the same scene and instruction, a robot may complete a task in several valid ways. A generated future may depict one completion while the demonstration records another. Training the IDM on that future with the recorded action asks it to learn from a mismatched pair.</span><span lang="zh">正确的视觉预测并不一定与记录的动作相容。面对相同场景和指令，机器人可能以多种有效方式完成任务；生成的未来状态可能对应其中一种，而示范记录的是另一种。将这样的未来预测与记录动作配对训练，会让 IDM 接收到不匹配的监督。</span></p><p style="margin: 0 0 48px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">We term this supervision mismatch the <span style="font-weight: 600; color: oklch(0.215 0.008 255);">validity gap</span>. Improving visual plausibility alone does not ensure that an independently generated future describes the behavior in the recording. Knowledge-aligned selective optimization (KASO) addresses the connection directly: it generates several candidate futures and selects those whose implied actions are compatible with the recorded behavior.</span><span lang="zh">我们将这种监督不匹配称为<span style="font-weight: 600; color: oklch(0.215 0.008 255);">“有效性缺口”</span>。仅提高视觉预测的真实性，并不能保证独立生成的未来状态与记录中的行为一致。知识对齐选择性优化（KASO）直接处理这一问题：生成多个候选未来，并选择其中所隐含动作与记录行为相容的候选。</span></p>
                   
       <div data-r="kaso" style="background: oklch(0.993 0.002 250); border-radius: 16px; padding: 30px 32px 34px; box-shadow: 0 24px 60px -40px oklch(0.4 0.04 255 / 0.42); width: min(1000px, calc(100vw - 96px)); position: relative; left: 50%; transform: translateX(-50%);">
         <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 20px;">
@@ -4220,13 +4221,13 @@
 
 
 
-  <section id="closing" style="margin-top: 120px; background: oklch(0.968 0.004 250); padding: 110px 48px 110px;">
+  <section id="conclusion" style="margin-top: 120px; background: oklch(0.968 0.004 250); padding: 110px 48px 110px;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">GE-Act 2.0 shows that scaling manipulation data produces broad improvements in zero-shot, out-of-distribution performance across manipulation skills, with gains extending to an embodiment sparsely represented in the shared training data. The model also demonstrates fine-grained instruction grounding and follows explicit commands even when they conflict with an ongoing action or a familiar scene association. Together, these findings establish GE-Act 2.0 as a scalable approach to learning transferable manipulation capabilities through world-action pretraining.</span><span lang="zh">GE-Act 2.0 表明，扩大操作数据规模能够在各类操作技能上带来广泛的零样本、分布外性能提升，且这种提升同样延伸到在共享训练数据中占比很少的本体。模型还表现出细粒度的指令理解能力：即使指令与正在进行的动作或场景中惯常的关联相冲突，也能按照明确指令执行。这些结果共同表明，GE-Act 2.0 是一条通过世界—动作预训练学习可迁移操作能力的可扩展路径。</span></p>
     </div>
   </section>
 
-  <section id="cite" style="padding: 100px 48px 0;">
+  <section id="citation" style="padding: 100px 48px 0;">
     <div data-r="cite-grid" style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 60px; align-items: start;">
       <div style="min-width: 0;">
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; "><span lang="en">CITATION</span><span lang="zh">引用</span></div>
@@ -4663,12 +4664,12 @@ class Component extends DCLogic {
   onLightTime = (e) => { const s = this.state.light || ''; if (s.indexOf('conflicts/') !== 0) return; const cues = this.CONF_CUES[s.slice(10)]; if (!cues || !cues.length) return; const k = this.cueIndex(cues, e.currentTarget.currentTime); if ((this.state.lightCue || 0) !== k) this.setState({ lightCue: k }); };
   stillReady = (slug) => (e) => { if (e && e.currentTarget) this.applyRate(slug, e.currentTarget); if (!this.state.vReady[slug]) this.setState({ vReady: Object.assign({}, this.state.vReady, { [slug]: true }) }); };
   // left table of contents (wide screens): active item follows the scroll position
-  TOC = [{ id: 'pretraining', label: 'Data utilization' }, { id: 'results', label: 'Data scaling' }, { id: 'language', label: 'Instruction following' },
-         { id: 'method', label: 'Method' }, { id: 'uae', label: 'CoAE', sub: true }, { id: 'svp', label: 'SVP', sub: true }, { id: 'kaso', label: 'KASO', sub: true },
-         { id: 'closing', label: 'Conclusion' }, { id: 'cite', label: 'Citation' }];
+  TOC = [{ id: 'data-utilization', label: 'Data utilization' }, { id: 'data-scaling', label: 'Data scaling' }, { id: 'instruction-following', label: 'Instruction following' },
+         { id: 'method', label: 'Method' }, { id: 'coae', label: 'CoAE', sub: true }, { id: 'svp', label: 'SVP', sub: true }, { id: 'kaso', label: 'KASO', sub: true },
+         { id: 'conclusion', label: 'Conclusion' }, { id: 'citation', label: 'Citation' }];
   tocBind = () => { if (this._tocBound || typeof window === 'undefined') return; this._tocBound = true;
     const upd = () => { let cur = ''; for (const t of this.TOC) { const el = document.getElementById(t.id); if (el && el.getBoundingClientRect().top <= 170) cur = t.id; }
-      const body = document.getElementById('pretraining'); const show = !!(body && body.getBoundingClientRect().top <= 300) ? '1' : '';
+      const body = document.getElementById('data-utilization'); const show = !!(body && body.getBoundingClientRect().top <= 300) ? '1' : '';
       if (cur !== this.state.tocActive || show !== this.state.tocShow) this.setState({ tocActive: cur, tocShow: show }); };
     window.addEventListener('scroll', () => window.requestAnimationFrame(upd), { passive: true }); setTimeout(upd, 800); };
   onToggleLang = () => this.setState({ lang: this.state.lang === 'en' ? 'zh' : 'en' });
@@ -4783,6 +4784,23 @@ class Component extends DCLogic {
     }, { rootMargin: '900px 0px' }) : null;
     this.scanLazy = () => { document.querySelectorAll('video[data-lazy]').forEach((el) => { if (el.__lazy) return; el.__lazy = true; if (el.getAttribute('data-lazy') === 'warm') { if (this.warmIO) this.warmIO.observe(el); else warmEl(el); } else if (this.lazyIO) this.lazyIO.observe(el); else startEl(el); }); };
     this.scanLazy();
+    /* deep links (#coae, #kaso, ...): the browser jumps before this page hydrates, so re-run the jump once the target exists */
+    const hashId = decodeURIComponent((location.hash || "").slice(1));
+    if (hashId) {
+      let stop = false; const cancelJump = () => { stop = true; };
+      ["wheel", "touchstart", "keydown"].forEach((e) => window.addEventListener(e, cancelJump, { once: true, passive: true }));
+      const rootStyle = document.documentElement.style, prevBehavior = rootStyle.scrollBehavior; rootStyle.scrollBehavior = "auto"; /* the page scrolls smoothly; the jump must be instant or the retries restart the animation */
+      const t0 = Date.now(); let lastTop = null;
+      const finish = () => { clearInterval(hj); rootStyle.scrollBehavior = prevBehavior; };
+      const hj = setInterval(() => {
+        if (stop || Date.now() - t0 > 6000) { finish(); return; }
+        const el = document.getElementById(hashId); if (!el) return;
+        const top = Math.round(el.getBoundingClientRect().top);
+        el.scrollIntoView({ block: "start", behavior: "auto" });
+        if (lastTop !== null && Math.abs(top - lastTop) < 2 && Date.now() - t0 > 1500) finish();
+        lastTop = top;
+      }, 150);
+    }
     this.lazyMO = new MutationObserver(() => { if (this.lazyRaf) return; this.lazyRaf = requestAnimationFrame(() => { this.lazyRaf = 0; this.scanLazy(); }); });
     this.lazyMO.observe(document.body, { childList: true, subtree: true });
     const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -4987,7 +5005,7 @@ class Component extends DCLogic {
       };
     });
     this.tocBind();
-    const secParent = { uae: 'method', svp: 'method', kaso: 'method' }; const secActive = secParent[this.state.tocActive] || this.state.tocActive;
+    const secParent = { coae: 'method', svp: 'method', kaso: 'method' }; const secActive = secParent[this.state.tocActive] || this.state.tocActive;
     const secLabel = (t) => this.state.lang === 'zh' ? (ZH_BODY[t.label] || t.label) : t.label;
     // top bar: one pill per section; Method carries a hover menu with CoAE / SVP / KASO
     const secItems = this.TOC.filter((t) => !t.sub).map((t) => { const subs = this.TOC.filter((u) => u.sub && secParent[u.id] === t.id).map((u) => ({ href: '#' + u.id, label: secLabel(u), on: this.state.tocActive === u.id ? '1' : '' })); return { href: '#' + t.id, label: secLabel(t), on: secActive === t.id ? '1' : '', hasSubs: subs.length > 0, subs }; });
