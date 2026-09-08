@@ -3350,7 +3350,6 @@
     </sc-for>
   </nav>
 
-
   <section id="top" style="padding: 96px 48px 0; display: flex; flex-direction: column; align-items: center; text-align: center;">
     <div style="font-size: 15px; font-weight: 600; color: oklch(0.47 0.008 255); margin-bottom: 20px;"><span lang="en">AgiBot Research</span><span lang="zh">智元机器人</span></div>
     <h1 data-r="hero-h1" style="font-size: 92px; line-height: 1.0; letter-spacing: -0.042em; font-weight: 700; margin: 0 0 24px;"><span style="background: linear-gradient(102deg, oklch(0.700 0.135 245), oklch(0.520 0.175 302)); -webkit-background-clip: text; background-clip: text; color: transparent;">GE-Act</span> 2.0</h1>
@@ -3825,7 +3824,7 @@
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">ARCHITECTURE</span><span lang="zh">模型架构</span></div>
       <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">GE-Act 2.0 Architecture</span><span lang="zh">GE-Act 2.0 架构</span></h2>
 <p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">GE-Act 2.0 turns an instruction into action through three components in sequence. The control-oriented autoencoder (CoAE) maps camera observations into a compact latent space. The single-step visual planner (SVP) predicts future states in that space, conditioned on the instruction and current observation. An inverse dynamics model (IDM) reads the predicted future together with the current latents and proprioception to produce an action chunk.</span><span lang="zh">GE-Act 2.0 通过三个依次连接的模块将指令转化为动作。面向控制的自编码器（CoAE）将相机观测映射到紧凑的潜在空间；单步视觉规划器（SVP）以当前观测和指令为条件，在该空间中预测未来状态；逆动力学模型（IDM）结合预测的未来、当前视觉潜变量与本体感知信息，生成动作片段。</span></p><p style="margin: 0 0 48px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">The future sequence covers two timescales: dense visual states over the immediate action horizon and sparse states extending to the end of the task. The IDM uses the full sequence for context, but the robot executes only the dense action chunk. Sparse far-horizon action predictions provide auxiliary supervision during training. This keeps the immediate control output connected to the visual outcome of the broader task.</span><span lang="zh">未来状态序列覆盖两种时间尺度：近期动作执行范围内的密集视觉状态，以及延伸至任务结束的稀疏视觉状态。IDM 使用完整序列提供的上下文，但机器人仅执行密集动作片段。远期稀疏动作预测在训练中提供辅助监督，将即时控制与整个任务的视觉结果联系起来。</span></p>
-      <p style="margin: 0 0 48px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en"><strong>Deployment.</strong> The full pipeline, from three camera frames to a chunk of 52 actions (1.7 s of motion at 30 Hz), runs in <strong>104 ms on a single RTX 5090</strong>: one CoAE encode, one MeanFlow pass in SVP, and five denoising steps in the IDM.</span><span lang="zh"><strong>部署。</strong>从三路相机画面到一段 52 步动作（30 Hz 下约 1.7 s 的运动），完整流程在<strong>单张 RTX 5090 上耗时 104 ms</strong>：CoAE 编码一次、SVP 的 MeanFlow 单步生成一次、IDM 去噪五步。</span></p>
+      
                   <div style="background: oklch(0.988 0.003 250); background-image: radial-gradient(oklch(0.918 0.006 250) 1.1px, transparent 1.1px); background-size: 20px 20px; border-radius: 18px; padding: 28px 32px 34px; overflow-x: auto; width: min(1000px, calc(100vw - 96px)); position: relative; left: 50%; transform: translateX(-50%);" data-r="arch" onMouseLeave="{{ clearStage }}">
         <div style="min-width: 936px; display: flex; flex-direction: column;">
 
@@ -4254,6 +4253,15 @@
 
 
 
+  <section id="deployment" style="margin-top: 120px; padding: 0 48px;">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.16em; color: oklch(0.500 0.195 265); margin-bottom: 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">REAL-TIME DEPLOYMENT</span><span lang="zh">实时部署</span></div>
+      <h2 style="font-size: 28px; line-height: 1.2; letter-spacing: -0.026em; font-weight: 700; margin: 0 0 20px; max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">From visual prediction to real-time action</span><span lang="zh">从视觉预测到实时动作</span></h2>
+      <p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">Predicting visual futures adds computation to the path from observation to action, making inference latency a central challenge for world-action models. GE-Act 2.0 runs its full pipeline—from three-camera observations to 52 executable actions—in <strong>104 ms on a single RTX 5090</strong>. Each chunk spans 1.7 seconds of motion at 30 Hz, supporting real-time robot control through action chunking on a consumer GPU.</span><span lang="zh">预测未来视觉状态增加了从观测到动作的计算开销，使推理延迟成为世界动作模型部署中的关键挑战。GE-Act 2.0 在<strong>单张 RTX 5090 上仅需 104 毫秒</strong>，即可完成从三路相机观测到生成 52 个可执行动作的完整推理流程。每个动作块以 30 Hz 执行，对应约 1.7 秒的运动时域，通过动作分块支持消费级 GPU 上的机器人实时控制。</span></p>
+      <p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">This efficiency starts with the visual representation and planner. CoAE maps each camera frame to just <strong>24 latent tokens through 64× spatial downsampling</strong>, keeping the visual sequences compact. SVP generates the complete future latent sequence in <strong>one MeanFlow pass</strong>, eliminating iterative denoising from visual planning. The IDM then converts the current and predicted visual states into actions in five denoising steps. Together, these choices make future prediction practical within a 104 ms observation-to-action pipeline.</span><span lang="zh">这一推理效率源于视觉表征与规划器的设计。CoAE 通过 <strong>64 倍空间下采样，将每帧图像压缩为仅 24 个潜在 token</strong>，使视觉序列保持紧凑。SVP 通过<strong>单次 MeanFlow 前向计算</strong>生成完整的未来潜在状态序列，无需在视觉规划阶段进行迭代去噪。随后，IDM 以五步去噪，将当前与预测的视觉状态转化为动作。这些设计共同使包含未来预测的完整观测到动作流程能够在 104 毫秒内完成。</span></p>
+    </div>
+  </section>
+
   <section id="conclusion" style="margin-top: 120px; background: oklch(0.968 0.004 250); padding: 110px 48px 110px;">
     <div style="max-width: 1000px; margin: 0 auto;">
       <p style="margin: 0 0 16px; font-size: 18px; line-height: 1.6; color: oklch(0.47 0.008 255); max-width: 760px; margin-left: auto; margin-right: auto;"><span lang="en">GE-Act 2.0 shows that scaling manipulation data produces broad improvements in zero-shot, out-of-distribution performance across manipulation skills, with gains extending to an embodiment sparsely represented in the shared training data. The model also demonstrates fine-grained instruction grounding and follows explicit commands even when they conflict with an ongoing action or a familiar scene association. Together, these findings establish GE-Act 2.0 as a scalable approach to learning transferable manipulation capabilities through world-action pretraining.</span><span lang="zh">GE-Act 2.0 表明，扩大操作数据规模能够在各类操作技能上带来广泛的零样本、分布外性能提升，且这种提升同样延伸到在共享训练数据中占比很少的本体。模型还表现出细粒度的指令理解能力：即使指令与正在进行的动作或场景中惯常的关联相冲突，也能按照明确指令执行。这些结果共同表明，GE-Act 2.0 是一条通过世界—动作预训练学习可迁移操作能力的可扩展路径。</span></p>
@@ -4358,7 +4366,7 @@ const ZH_BODY = {
   "Data scaling": "数据规模扩展",
   "Instruction following": "指令跟随",
   "Method": "方法",
-  "Conclusion": "总结",
+  "Real-time inference": "实时推理", "Conclusion": "总结",
   "Citation": "引用",
   "The commanded object changes mid-reach.": "手臂伸向目标时，指令指定的物体发生变化。",
   "Green cup, then the blue cup while the arm is already reaching, then the red cup. The robot redirects each time and completes the last command.": "先是绿色杯子，随后改为蓝色杯子，再改为红色杯子。机器人每次都调整动作方向，并完成最后一条指令。",
@@ -4697,6 +4705,7 @@ class Component extends DCLogic {
   // left table of contents (wide screens): active item follows the scroll position
   TOC = [{ id: 'data-utilization', label: 'Data utilization' }, { id: 'data-scaling', label: 'Data scaling' }, { id: 'instruction-following', label: 'Instruction following' },
          { id: 'method', label: 'Method' }, { id: 'coae', label: 'CoAE', sub: true }, { id: 'svp', label: 'SVP', sub: true }, { id: 'kaso', label: 'KASO', sub: true },
+         { id: 'deployment', label: 'Real-time inference' },
          { id: 'conclusion', label: 'Conclusion' }, { id: 'citation', label: 'Citation' }];
   tocBind = () => { if (this._tocBound || typeof window === 'undefined') return; this._tocBound = true;
     const upd = () => { let cur = ''; for (const t of this.TOC) { const el = document.getElementById(t.id); if (el && el.getBoundingClientRect().top <= 170) cur = t.id; }
