@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>
-// GENERATED from dc-runtime/src/*.ts — do not edit. Rebuild with `cd dc-runtime && bun run build`.
+
 "use strict";
 (() => {
   var __defProp = Object.defineProperty;
   var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
   var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-  // src/react.ts
+  
   function getReact() {
     const R = window.React;
     if (!R) throw new Error("dc-runtime: window.React is not available yet");
@@ -26,7 +26,7 @@
     ...args
   ));
 
-  // src/parse.ts
+  
   function parseDcDocument(doc) {
     const dc = doc.querySelector("x-dc");
     if (!dc) return null;
@@ -88,7 +88,7 @@
     return base.replace(/\.dc\.html$/, "").replace(/\.html?$/, "") || "Root";
   }
 
-  // src/boot.ts
+  
   var BASE_CSS = `
     .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
       border:1px solid color-mix(in srgb,currentColor 50%,transparent);
@@ -205,7 +205,7 @@
     return rootName;
   }
 
-  // src/expr.ts
+  
   var IDENT_RE = /^[A-Za-z_$][A-Za-z0-9_$]*/;
   var NUMBER_RE = /^-?\d+(\.\d+)?$/;
   function resolve(vals, src) {
@@ -299,7 +299,7 @@
     return cur;
   }
 
-  // src/encode.ts
+  
   var CAMEL_ATTR = "sc-camel-";
   var INLINE_TEXT_TAGS = new Set(
     "a abbr b bdi bdo br cite code del dfn em i ins kbd mark q s samp small span strike strong sub sup u var wbr".split(
@@ -417,7 +417,7 @@
     return () => raw;
   }
 
-  // src/compile.ts
+  
   function collectProps(node, kind, host) {
     const propGetters = [];
     const pseudoClasses = [];
@@ -448,7 +448,7 @@
     }
     return { propGetters, pseudoClasses, hintSize };
   }
-  var HOST_STYLE_PROPS = /* @__PURE__ */ new Set([
+  var HOST_STYLE_PROPS =   new Set([
     "position",
     "left",
     "right",
@@ -472,7 +472,7 @@
   }
   function compileTemplate(html, host) {
     const tpl = document.createElement("template");
-    //! nosemgrep: direct-inner-html-assignment
+    
     tpl.innerHTML = encodeCase(html);
     let tplN = 0;
     (function stamp(node) {
@@ -499,8 +499,8 @@
   function walkDeckChildren(el, host) {
     const pairs = [...el.childNodes].map((c) => ({ c, b: walk(c, host) })).filter((p) => p.b !== null);
     const kids = pairs.map((p) => p.b);
-    const seen = /* @__PURE__ */ new Set();
-    const wsSeen = /* @__PURE__ */ new Map();
+    const seen =   new Set();
+    const wsSeen =   new Map();
     const keys = [];
     const nextSlideId = new Array(pairs.length);
     {
@@ -565,7 +565,7 @@
     if (tag === "dc-import") return walkComponent(el, host);
     return walkElement(el, host);
   }
-  var warnedHoles = /* @__PURE__ */ new Set();
+  var warnedHoles =   new Set();
   function warnUnresolved(ctx, what) {
     const key = (ctx?.__name || "?") + "\0" + what;
     if (warnedHoles.has(key)) return;
@@ -819,12 +819,12 @@
     };
   }
 
-  // src/logic.ts
+  
   var StreamableLogic = class {
     constructor(props) {
       __publicField(this, "props");
       __publicField(this, "state", {});
-      /** Back-pointer to the wrapper component, installed after construction. */
+       
       __publicField(this, "__host");
       this.props = props || {};
     }
@@ -840,13 +840,13 @@
     }
     componentWillUnmount() {
     }
-    /** The flat object the template renders against (merged over props). */
+     
     renderVals() {
       return {};
     }
   };
   function evalDcLogic(src) {
-    //! nosemgrep: eval-and-function-constructor
+    
     const fn = new Function(
       "DCLogic",
       "StreamableLogic",
@@ -856,7 +856,7 @@
     return fn(StreamableLogic, StreamableLogic, getReact());
   }
 
-  // src/component.ts
+  
   function shallowEqual(a, b) {
     if (!b) return false;
     const ak = Object.keys(a).filter((k) => k !== "children");
@@ -900,23 +900,14 @@
         __publicField(this, "__name");
         __publicField(this, "__sub");
         __publicField(this, "__needsDidMount", false);
-        /** Snapshot of the registry's streaming flags taken at render time —
-         *  builders read it off the RenderCtx (this) to pick placeholder vs
-         *  render-nothing for unresolved values. */
+         
         __publicField(this, "__streamingNow", false);
         __publicField(this, "__htmlStreamingNow", false);
-        /** When a construct throws, remember the (class, registry.ver, props)
-         *  triple so render-time reconcile doesn't re-attempt it on every parent
-         *  re-render. A registry bump (new class, template, external module
-         *  resolving via bumpAll) changes `ver` and breaks the memo so an
-         *  env-dependent constructor can self-heal. */
+         
         __publicField(this, "__failedLogic", null);
         __publicField(this, "__failedUserProps", null);
         __publicField(this, "__failedVer", -1);
-        /** Per-instance constructor error — kept here (not on the registry entry)
-         *  so one instance's successful construct can't hide a sibling's failure,
-         *  and a construct can never wipe an eval error `updateJs` recorded on
-         *  `r.logicError`. */
+         
         __publicField(this, "__ctorError", null);
         __publicField(this, "logic");
         this.__name = props.__name;
@@ -928,9 +919,7 @@
         this.__makeLogic(registry.get(this.__name).Logic, null);
         ensureFetched(this.__name);
       }
-      /** Error-boundary hook: a render crash anywhere in this DC's subtree
-       *  (its own template, an x-import'd component, a child DC without its
-       *  own deeper boundary) lands here instead of unmounting the page. */
+       
       static getDerivedStateFromError(e) {
         return { __err: e instanceof Error && e.message ? e.message : String(e) };
       }
@@ -941,8 +930,7 @@
           info?.componentStack || ""
         );
       }
-      /** Instantiate the logic class (or the no-op base) and adopt `prevState`
-       *  over its initial state — used both at mount and on hot-swap. */
+       
       __makeLogic(Logic, prevState) {
         const L = Logic || StreamableLogic;
         try {
@@ -964,8 +952,7 @@
         if (prevState)
           this.logic.state = { ...this.logic.state || {}, ...prevState };
       }
-      /** The props the author's logic + template see — internal __-prefixed
-       *  wiring stripped. */
+       
       __userProps() {
         const { __name, __hintSize, __tplId, __hostStyle, ...rest } = this.props;
         return rest;
@@ -976,9 +963,7 @@
         this.logic.state = { ...prev, ...patch };
         this.setState((s) => ({ __v: s.__v + 1 }), cb);
       }
-      /** Swap the logic instance when the registry's Logic class changed
-       *  (streaming completion, hot reload). State carries over; didMount
-       *  re-fires after the swap commits so refs exist. */
+       
       __reconcileLogic() {
         const r = registry.get(this.__name);
         const Next = r.Logic;
@@ -1112,7 +1097,7 @@
       }
     }
     __publicField(StreamableComponent, "contextType", AncestorContext);
-    const named = /* @__PURE__ */ new Map();
+    const named =   new Map();
     function getDC(name) {
       const hit = named.get(name);
       if (hit) return hit;
@@ -1138,14 +1123,14 @@
     };
   }
 
-  // src/bundled.ts
+  
   function bundledBlob(url) {
     const blobs = window.__resourceBlobs;
     const b = blobs ? blobs[url.split("#")[0]] : void 0;
     return b instanceof Blob ? b : null;
   }
 
-  // src/cdn.ts
+  
   var REACT_URL = "https://unpkg.com/react@18.3.1/umd/react.production.min.js";
   var REACT_SRI = "sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z";
   var REACT_DOM_URL = "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js";
@@ -1158,7 +1143,7 @@
     return typeof v === "string" && v ? { src: v } : { src: url, integrity: sri };
   }
 
-  // src/external.ts
+  
   var isCustomElementName = (n) => !n.includes(".") && n.includes("-");
   function isRenderableType(g) {
     if (typeof g === "function") return !isElementClass(g);
@@ -1175,10 +1160,10 @@
   var GLOBAL_POLL_INTERVAL_MS = 50;
   var GLOBAL_POLL_TIMEOUT_MS = 3e4;
   function createExternalModules(onResolved) {
-    const cache = /* @__PURE__ */ new Map();
+    const cache =   new Map();
     let babelLoading = null;
-    const reportedMissing = /* @__PURE__ */ new Map();
-    const polling = /* @__PURE__ */ new Set();
+    const reportedMissing =   new Map();
+    const polling =   new Set();
     function ensureBabel() {
       if (window.Babel) return Promise.resolve();
       if (babelLoading) return babelLoading;
@@ -1196,7 +1181,7 @@
       });
       return babelLoading;
     }
-    const pending = /* @__PURE__ */ new Map();
+    const pending =   new Map();
     function load(kind, url, after) {
       const existing = pending.get(url);
       if (existing) return existing;
@@ -1220,7 +1205,7 @@
         }).code : src;
         const module = { exports: {} };
         const before = new Set(Object.keys(window));
-        //! nosemgrep: eval-and-function-constructor
+        
         new Function("React", "module", "exports", "require", code)(
           getReact(),
           module,
@@ -1359,19 +1344,19 @@
     }
   }
 
-  // src/atomics.ts
+  
   var ATOMIC_CSS = (
-    // layout
+    
     ".fx{display:flex}.col{display:flex;flex-direction:column}.grid{display:grid}.ac{align-items:center}.jc{justify-content:center}.jb{justify-content:space-between}.f1{flex:1}.noshrink{flex-shrink:0}.wrap{flex-wrap:wrap}.fw5{font-weight:500}.fw6{font-weight:600}.fw7{font-weight:700}.fw8{font-weight:800}.fs11{font-size:11px}.fs12{font-size:12px}.fs13{font-size:13px}.fs14{font-size:14px}.fs15{font-size:15px}.fs16{font-size:16px}.fs20{font-size:20px}.fs22{font-size:22px}.upper{text-transform:uppercase}.tc{text-align:center}.nowrap{white-space:nowrap}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}.m0{margin:0}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.posrel{position:relative}.posabs{position:absolute}.round{border-radius:50%}.ohide{overflow:hidden}.bbox{box-sizing:border-box}.pointer{cursor:pointer}.w100{width:100%}.b0{border:none}"
   );
 
-  // src/helmet.ts
+  
   var DESIGN_DOC_MODE_RE = /<meta\b[^>]*\bname\s*=\s*["']design_doc_mode["'][^>]*\b(?:content|value)\s*=\s*["'](\w+)["']/i;
   var CANVAS_BG_LIGHT = "#f0eee6";
   var CANVAS_BG_DARK = "#2e2c26";
   function createHelmetManager(doc, isStreaming) {
-    const mounted = /* @__PURE__ */ new Set();
-    const live = /* @__PURE__ */ new Map();
+    const mounted =   new Set();
+    const live =   new Map();
     let designDocMode = null;
     let canvasStyleEl = null;
     let appTheme = "light";
@@ -1500,7 +1485,7 @@
     return { compile, setDesignDocMode };
   }
 
-  // src/pseudo.ts
+  
   function scanUnquotedUrl(css, i) {
     if (css[i] !== "u" && css[i] !== "U" || css.slice(i, i + 4).toLowerCase() !== "url(" || /[a-z0-9_-]/i.test(css[i - 1] ?? "")) {
       return -1;
@@ -1572,7 +1557,7 @@
   }
   function createPseudoSheet(doc) {
     let el = null;
-    const cache = /* @__PURE__ */ new Map();
+    const cache =   new Map();
     let n = 0;
     return (pseudo, css) => {
       const k = pseudo + "|" + css;
@@ -1594,9 +1579,9 @@
     };
   }
 
-  // src/registry.ts
+  
   function createRegistry() {
-    const entries = /* @__PURE__ */ Object.create(null);
+    const entries =   Object.create(null);
     function get(name) {
       return entries[name] || (entries[name] = {
         html: "",
@@ -1605,7 +1590,7 @@
         jsStreaming: false,
         htmlStreaming: false,
         ver: 0,
-        subs: /* @__PURE__ */ new Set(),
+        subs:   new Set(),
         fetched: false
       });
     }
@@ -1624,7 +1609,7 @@
     };
   }
 
-  // src/runtime.ts
+  
   var COMPONENT_DIR = ".";
   function createRuntime(doc = document) {
     const registry = createRegistry();
@@ -1794,9 +1779,9 @@
     };
   }
 
-  // src/stream-state.ts
+  
   function createStreamTracker(staleMs = 6e4, now = Date.now) {
-    const since = /* @__PURE__ */ new Map();
+    const since =   new Map();
     const liveOne = (n) => {
       const t = since.get(n);
       if (t === void 0) return false;
@@ -1820,7 +1805,7 @@
     };
   }
 
-  // src/index.ts
+  
   function hideRawTemplate() {
     const s = document.createElement("style");
     s.textContent = "x-dc{display:none!important}";
@@ -1828,7 +1813,7 @@
   }
   function loadScript(src, integrity) {
     return new Promise((resolve2, reject) => {
-      //! nosemgrep: create-script-element
+      
       const s = document.createElement("script");
       s.src = src;
       if (integrity) {
@@ -1882,16 +1867,11 @@
       },
       __dcStreaming: (name) => streams.live(name),
       __dcSetProps: (name, overrides) => runtime.setProps(name, overrides),
-      /** Name of the component currently mounted as the page root — DC tools
-       *  push their template-stream here when targeting "the open page". */
+       
       __dcRootName: () => rootName,
-      /** Editor bridge — the encoded, `data-dc-tpl`-annotated template source.
-       *  The host editor parses this into its own template DOM so it can map a
-       *  rendered node (carrying the same `data-dc-tpl`) back to the source
-       *  node that emitted it. Returns the encoded form (`sc-camel-*` attrs,
-       *  `<sc-raw-*>`/`<sc-helmet>` tags); the editor decodes on serialize. */
+       
       __dcAnnotatedTemplate: (name) => runtime.annotatedTemplate(name),
-      /** Editor bridge — the *original* (decoded) template source. */
+       
       __dcTemplateSource: (name) => runtime.templateSource(name),
       __dcBoot: () => {
         rootName = boot(runtime, document) ?? rootName;
@@ -1899,8 +1879,8 @@
       },
       __dcRegistry: runtime.registry.entries,
       getDC: (name) => runtime.getDC(name),
-      // `DCLogic` is the documented base class name; `StreamableLogic` is the
-      // implementation alias kept for any project that already references it.
+      
+      
       DCLogic: runtime.StreamableLogic,
       StreamableLogic: runtime.StreamableLogic
     };
@@ -1918,123 +1898,37 @@
 
 </script>
 <script>
-// @ds-adherence-ignore -- omelette starter scaffold (raw elements/hex/px by design)
-// Copied omelette starter. Re-running copy_starter_component with this kind overwrites this file with the latest version (page content is unaffected).
-/* BEGIN USAGE */
-/**
- * <image-slot> — user-fillable image placeholder.
- *
- * Drop this into a deck, mockup, or page wherever a design needs an image.
- * You control the slot's shape; it sizes to its container by default. When the search_stock_photos tool
- * is available, prefill the slot by default — write the photo's URL into
- * src (with credit/credit-href); the user can still fill or replace it
- * by dragging an image file onto it (or clicking to browse). The dropped
- * image persists across reloads via a .image-slots.state.json sidecar —
- * same read-via-fetch / write-via-window.omelette pattern as
- * design_canvas.jsx, so the filled slot shows on share links, downloaded
- * zips, and PPTX export. Outside the omelette runtime the slot is read-only.
- *
- * The sidecar is a SIBLING of the HTML file that uses this component: the
- * read is a document-relative fetch, and the host resolves the bridge's
- * sidecar writes into the previewed file's directory to match (same
- * contract as design_canvas.jsx). Pages in the same directory share one
- * sidecar; keep slot ids distinct across them.
- *
- * Attributes:
- *   id           Persistence key. REQUIRED for the drop to survive reload —
- *                every slot on the page needs a distinct id.
- *   shape        'rect' | 'rounded' | 'circle' | 'pill'   (default 'rounded')
- *                'circle' applies 50% border-radius; on a non-square slot
- *                that's an ellipse — set equal width and height for a true
- *                circle.
- *   radius       Corner radius in px for 'rounded'.       (default 12)
- *   mask         Any CSS clip-path value. Overrides `shape` — use this for
- *                hexagons, blobs, arbitrary polygons.
- *   fit          Initial framing baseline: cover | contain.   (default 'cover')
- *                cover starts the image filling the frame (overflow cropped);
- *                contain starts it fully visible (letterboxed). Either way the
- *                user can always pan/scale from there — double-click, or the
- *                Edit control, enters reframe mode (drag to move, scroll or
- *                corner-handles to scale; Escape / click-out commits). The
- *                crop persists alongside the image in the sidecar.
- *   placeholder  Empty-state caption.                      (default 'Drop an image')
- *   src          Optional initial/fallback image URL. Prefill it with a real
- *                photo via search_stock_photos when that tool is available
- *                (set credit/credit-href from the result). A user drop
- *                overrides it; clearing the drop reveals src again.
- *   credit       Attribution text shown as a small overlay at the
- *                bottom-left of the filled slot. REQUIRED whenever src
- *                points at any Unsplash host (images.unsplash.com,
- *                plus.unsplash.com, …): an Unsplash src with no credit
- *                renders an error tile INSTEAD of the photo (Unsplash
- *                terms forbid showing their photos unattributed). Use the
- *                exact form 'Photo by {photographer name} on Unsplash' —
- *                the overlay then links the name to credit-href and
- *                'Unsplash' to the Unsplash homepage, and links back to
- *                unsplash.com automatically get the required utm referral
- *                params appended at render time. The credit belongs to
- *                the src image, so it only shows while src is what's
- *                displayed — a user-dropped image hides it.
- *   credit-href  Link for the photographer's name in the credit overlay
- *                (their Unsplash profile URL from the stock-photo search
- *                results). http(s) URLs only — anything else renders the
- *                name as plain text.
- *
- * Sizing: the slot fills its container by default (width/height 100%).
- * Put it in a sized wrapper — absolutely positioned, a grid cell, a fixed
- * frame — and it takes exactly that box. When the parent's height is
- * indefinite (ordinary flow), it falls back to full width at a 3:2 aspect
- * ratio instead of collapsing. In a shrink-to-fit parent (a float,
- * width:max-content, an unsized absolute wrapper), percentages have
- * nothing to resolve against — size the slot or its wrapper explicitly
- * there. For a fixed-size slot, set
- * width/height on the element itself (inline style), which overrides the
- * default. When
- * layering content above a slot (full-bleed layouts), make the overlay
- * click-through — pointer-events: none on scrims/text plates, re-enabled
- * on interactive children — so the slot's hover controls stay reachable.
- * Keep the slot's bottom-left corner visually clear as well: the credit
- * overlay renders there, and a dark fade or text plate covering it hides
- * the attribution Unsplash's terms require — end the fade above that
- * corner, or keep it nearly transparent where the credit sits.
- *
- * Usage:
- *   <div style="position:relative;width:100%;height:100%">      <\!-- full-bleed: -->
- *     <image-slot id="bg" shape="rect"></image-slot>            <\!-- fills the wrapper -->
- *   </div>
- *   <image-slot id="hero"   style="width:800px;height:450px" shape="rounded" radius="20"
- *               placeholder="Drop a hero image"></image-slot>
- *   <image-slot id="avatar" style="width:120px;height:120px" shape="circle"></image-slot>
- *   <image-slot id="kite"   style="width:300px;height:300px"
- *               mask="polygon(50% 0, 100% 50%, 50% 100%, 0 50%)"></image-slot>
- */
-/* END USAGE */
+
+
+ 
+ 
+ 
 
 (() => {
   const STATE_FILE = '.image-slots.state.json';
 
-  // Unsplash terms require visible attribution wherever their photos
-  // display, and every link back to unsplash.com must carry utm referral
-  // params. Two render-time rules enforce that here:
-  //  - an Unsplash-src slot with NO credit attribute renders an error
-  //    tile INSTEAD of the photo (an uncredited Unsplash photo on screen
-  //    is itself the terms violation, so it never renders bare);
-  //  - rendered credit links pointing at unsplash.com get the referral
-  //    params appended when absent (credit-href values live in page
-  //    content that can't be edited after the fact).
-  // Keep the utm_source value in sync with UTM_SOURCE in
-  // platform/web-agent/unsplash.ts — this file is a project-local
-  // artifact and cannot import it (equality is pinned by tests).
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   const UNSPLASH_HOMEPAGE_HREF =
     'https://unsplash.com/?utm_source=claude_design&utm_medium=referral';
-  // Host rule mirrors the hotlink validator that admits Unsplash srcs into
-  // pages in the first place (cdn$ in unsplash.ts: apex or any subdomain)
-  // — Unsplash+ results serve from plus.unsplash.com, not just images.*,
-  // and an admitted-but-uncredited photo must error whatever unsplash
-  // host it rides on.
-  // Trailing-dot FQDNs (images.unsplash.com.) are the same host to the
-  // browser but would miss the regex — strip one dot so the check fails
-  // CLOSED (unrecognized-but-real Unsplash srcs must error, not render).
+  
+  
+  
+  
+  
+  
+  
+  
   const isUnsplashHost = (u) => {
     try {
       return /(^|\.)unsplash\.com$/.test(
@@ -2044,11 +1938,11 @@
       return false;
     }
   };
-  // Render-time referral normalization for links back to Unsplash:
-  // appends utm_source/utm_medium when absent, preserves every existing
-  // query param, never overwrites an existing utm_source, and passes
-  // non-Unsplash URLs through untouched. Input is an ABSOLUTE validated
-  // http(s) URL (the credit render funnel resolves + validates first).
+  
+  
+  
+  
+  
   const withReferral = (href) => {
     try {
       const u = new URL(href);
@@ -2066,25 +1960,25 @@
       return href;
     }
   };
-  // 2× a ~600px slot in a 1920-wide deck — retina-sharp without making the
-  // sidecar enormous. A 1200px WebP at q=0.85 is ~150-300KB.
+  
+  
   const MAX_DIM = 1200;
-  // Raster formats only. SVG is excluded (can carry script; createImageBitmap
-  // on SVG blobs is inconsistent). GIF is excluded because the canvas
-  // re-encode keeps only the first frame, so an animated GIF would silently
-  // go still — better to reject than surprise.
+  
+  
+  
+  
   const ACCEPT = ['image/png', 'image/jpeg', 'image/webp', 'image/avif'];
 
-  // ── Shared sidecar store ────────────────────────────────────────────────
-  // One fetch + immediate write-on-change for every <image-slot> on the
-  // page. Reads via fetch() so viewing works anywhere the HTML and sidecar
-  // are served together; writes go through window.omelette.writeFile, which
-  // the host allowlists to *.state.json basenames only.
+  
+  
+  
+  
+  
   const subs = new Set();
   let slots = {};
-  // ids explicitly cleared before the sidecar fetch resolved — otherwise
-  // the merge below can't tell "never set" from "just deleted" and would
-  // resurrect the sidecar's stale value.
+  
+  
+  
   const tombstones = new Set();
   let loaded = false;
   let loadP = null;
@@ -2094,13 +1988,13 @@
     loadP = fetch(STATE_FILE)
       .then((r) => (r.ok ? r.json() : null))
       .then((j) => {
-        // Merge: sidecar loses to any in-memory change that raced ahead of
-        // the fetch (drop or clear) so neither is clobbered by hydration.
+        
+        
         if (j && typeof j === 'object') {
           const merged = Object.assign({}, j, slots);
-          // A framing-only write that raced ahead of hydration must not
-          // drop a user image that's only on disk — inherit u from the
-          // sidecar for any in-memory entry that lacks one.
+          
+          
+          
           for (const k in slots) {
             if (merged[k] && !merged[k].u && j[k]) {
               merged[k].u = typeof j[k] === 'string' ? j[k] : j[k].u;
@@ -2116,23 +2010,23 @@
     return loadP;
   }
 
-  // Serialize writes so two near-simultaneous drops on different slots
-  // can't reorder at the backend and leave the sidecar with only the
-  // first. A save requested mid-flight just marks dirty and re-fires on
-  // completion with the then-current slots.
+  
+  
+  
+  
   let saving = false;
   let saveDirty = false;
-  // Unload-time flush: save()'s serialization defers a mid-RTT re-fire to a
-  // .then that never runs in an unloading document, silently dropping a
-  // pagehide commit. Post the current slots immediately instead — content
-  // is a superset snapshot of any in-flight save's, the write is a
-  // whole-file last-writer-wins replace, and postMessage FIFO delivers it
-  // to the host after the in-flight one, so a backend-side reorder at
-  // worst reproduces the dropped-commit outcome this flush improves on.
-  // Guarded on the initial sidecar read: pre-hydration slots can miss
-  // other slots' persisted entries, and flushing it would clobber them —
-  // that narrow case stays best-effort (the in-memory merge in load()
-  // cannot happen in an unloading document anyway).
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   function flushNow() {
     if (!loaded) return;
     const w = window.omelette && window.omelette.writeFile;
@@ -2152,8 +2046,8 @@
   const S_MAX = 5;
   const clampS = (s) => Math.max(1, Math.min(S_MAX, s));
 
-  // Normalize a stored slot value. Pre-reframe sidecars stored a bare
-  // data-URL string; newer ones store {u, s, x, y}. Either shape is valid.
+  
+  
   function getSlot(id) {
     const v = slots[id];
     if (!v) return null;
@@ -2165,17 +2059,17 @@
     if (val) { slots[id] = val; tombstones.delete(id); }
     else { delete slots[id]; if (!loaded) tombstones.add(id); }
     subs.forEach((fn) => fn());
-    // A drop is rare + high-value — write immediately so nav-away can't lose
-    // it. Gate on the initial read so we don't overwrite a sidecar we haven't
-    // merged yet; the merge in load() keeps this change once the read lands.
+    
+    
+    
     if (loaded) save(); else load().then(save);
   }
 
-  // ── Image downscale ─────────────────────────────────────────────────────
-  // Encode through a canvas so the sidecar carries resized bytes, not the
-  // raw upload. Longest side is capped at 2× the slot's rendered width
-  // (retina) and at MAX_DIM. WebP keeps alpha and is ~10× smaller than PNG
-  // for photos, so there's no need for per-image format picking.
+  
+  
+  
+  
+  
   async function toDataUrl(file, targetW) {
     const bitmap = await createImageBitmap(file);
     try {
@@ -2192,40 +2086,40 @@
     }
   }
 
-  // ── Custom element ──────────────────────────────────────────────────────
+  
   const stylesheet =
-    // Fill the container by default: slots are usually placed inside a
-    // sized wrapper (a hero frame, a grid cell, an inset:0 layer) and are
-    // expected to take that box — a fixed intrinsic size would render as
-    // a small tile in the corner of a full-bleed wrapper instead.
-    // aspect-ratio is the companion fallback that keeps a bare slot
-    // visible when the parent's height is indefinite: height:100%
-    // resolves to auto there, and the ratio then derives height from
-    // width instead of letting the slot collapse to zero height.
-    // Explicit width/height on the element override all of this.
-    // color:inherit (not a fixed near-black): the placeholder chrome —
-    // empty-state icon/caption (currentColor) and the dashed ring — must
-    // read on dark decks too, and the slide's own text color is the one
-    // color guaranteed to contrast with the slide background. The soft
-    // look comes from opacity on those parts, not from a baked-in alpha.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     ':host{display:block;position:relative;' +
     '  font:13px/1.3 system-ui,-apple-system,sans-serif;' +
     '  width:100%;height:100%;aspect-ratio:3/2}' +
     '.empty .cap,.empty .sub{opacity:.75}' +
     '.frame{position:absolute;inset:0;overflow:hidden;background:rgba(127,127,127,.08)}' +
-    // .frame img (clipped) and .spill (unclipped ghost + handles) share the
-    // same left/top/width/height in frame-%, computed by _applyView(), so the
-    // inside-mask crop and the outside-mask spill stay pixel-aligned.
+    
+    
+    
     '.frame img{position:absolute;max-width:none;transform:translate(-50%,-50%);' +
     '  -webkit-user-drag:none;user-select:none;touch-action:none}' +
-    // Reframe mode (double-click): the full image spills past the mask. The
-    // spill layer is sized to the IMAGE bounds so its corners are where the
-    // resize handles belong. The ghost <img> inside is translucent; the real
-    // clipped <img> underneath shows the opaque in-mask crop.
-    // popover=manual promotes the spill to the top layer on reframe, so it is
-    // not clipped by any overflow:hidden / clip-path / scroll-container
-    // ancestor (a plain z-index can't escape overflow clipping). UA popover
-    // defaults (inset:0;margin:auto) are reset; _applyView sets viewport px.
+    
+    
+    
+    
+    
+    
+    
+    
     '.spill{position:fixed;margin:0;inset:auto;border:0;padding:0;background:transparent;' +
     '  overflow:visible;transform:translate(-50%,-50%);z-index:1;cursor:grab;touch-action:none}' +
     ':host([data-panning]) .spill{cursor:grabbing}' +
@@ -2255,27 +2149,27 @@
     '  opacity:.35;transition:border-color .12s,opacity .12s}' +
     ':host([data-over]) .ring{border-color:#c96442;opacity:1}' +
     ':host([data-filled]) .ring{display:none}' +
-    // Controls overlay INSIDE the frame, pinned to the top-right corner, so
-    // a full-bleed slot in an overflow:hidden container still shows them
-    // (the old below-mask placement got clipped). Credit sits bottom-left,
-    // so top-right avoids collision. The blurred pill background keeps them
-    // legible over the image.
-    // The UA [popover] base rule styles the element in EVERY state (only
-    // display:none is gated on :not(:popover-open), and the display:flex
-    // below overrides that) — so the UA resets live HERE, like .spill's,
-    // or the ordinary hover-state strip renders as a bordered Canvas box
-    // centered by margin:auto. inset:auto precedes top/right (shorthand).
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     '.ctl{position:absolute;inset:auto;top:8px;right:8px;margin:0;border:0;padding:0;' +
     '  background:transparent;overflow:visible;' +
     '  display:flex;gap:6px;opacity:0;pointer-events:none;transition:opacity .12s;z-index:2;' +
     '  white-space:nowrap}' +
-    // While reframing, the spill owns the top layer and would swallow every
-    // click on the in-frame controls. Promoting .ctl into the top layer
-    // ABOVE the spill (shown after it — later popovers stack higher) keeps
-    // Edit-as-toggle and Replace clickable mid-reframe. _applyView pins it
-    // to the frame's top-right in viewport px (translateX(-100%)
-    // right-aligns against the computed left edge); inset:auto clears the
-    // base rule's top/right so the inline left/top position it alone.
+    
+    
+    
+    
+    
+    
+    
     '.ctl:popover-open{position:fixed;inset:auto;transform:translateX(-100%)}' +
     ':host([data-filled][data-editable]:hover) .ctl,:host([data-reframe]) .ctl' +
     '  {opacity:1;pointer-events:auto}' +
@@ -2285,11 +2179,11 @@
     '.ctl button:hover{background:rgba(0,0,0,.8)}' +
     '.err{position:absolute;left:8px;bottom:8px;right:8px;color:#b3261e;font-size:11px;' +
     '  background:rgba(255,255,255,.85);padding:4px 6px;border-radius:5px;pointer-events:none}' +
-    // Replacement in flight: after a src swap the browser keeps painting
-    // the PREVIOUS image until the new one decodes, so a Replace would
-    // flash the old photo and then pop. Hide the stale frame (visibility,
-    // not display — _applyView geometry still applies) and spin until the
-    // new image reports in (load/error clears data-swapping).
+    
+    
+    
+    
+    
     ':host([data-swapping]) .frame img{visibility:hidden}' +
     '.loading{position:absolute;inset:0;display:none;align-items:center;' +
     '  justify-content:center;pointer-events:none}' +
@@ -2298,43 +2192,43 @@
     '  border:2px solid rgba(127,127,127,.25);border-top-color:currentColor;' +
     '  animation:om-slot-spin .7s linear infinite}' +
     '@keyframes om-slot-spin{to{transform:rotate(360deg)}}' +
-    // Reduced motion: the static two-tone ring still reads as "working".
+    
     '@media (prefers-reduced-motion:reduce){.loading::after{animation:none}}' +
     '.credit{position:absolute;left:6px;bottom:6px;max-width:calc(100% - 12px);display:none;' +
     '  padding:3px 7px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff;' +
     '  font:10px/1.2 system-ui,-apple-system,sans-serif;text-decoration:none;' +
     '  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;backdrop-filter:blur(6px)}' +
-    // The credit is a SPAN holding one or two <a>s (Unsplash's prescribed
-    // form links the photographer AND Unsplash) — anchors style inline so
-    // the overlay reads as one line of text.
+    
+    
+    
     '.credit a{color:inherit;text-decoration:none}' +
     '.credit a:hover,.credit a:focus-visible{text-decoration:underline}' +
     ':host([data-filled][data-credit]) .credit{display:block}' +
-    // Exports must ship JUST the image — no hover controls, no credit chip
-    // (the host marks <html data-om-exporting> for the capture window; the
-    // page-level hide script can't reach shadow DOM, this rule can).
+    
+    
+    
     ':host-context([data-om-exporting]) .ctl,' +
     ':host-context([data-om-exporting]) .credit{display:none !important}' +
-    // Print must ship just the image too: the hover-gated controls can be
-    // mid-hover when print() fires, and the credit chip is screen chrome —
-    // the same rule the capture window gets, keyed on print media instead
-    // of the host's data-om-exporting mark (the print path sets no mark).
+    
+    
+    
+    
     '@media print{.ctl,.credit{display:none !important}}' +
-    // No export-window mask rules here on purpose: the export capture
-    // releases the replacement mask by REMOVING data-swapping (the
-    // shadow-root pass in pages/export/shared.ts HIDE_EXPORT_CHROME_SCRIPT)
-    // — attribute removal works in every engine (:host-context is
-    // Chromium-only), is scoped by construction to slots actually
-    // mid-swap, and hides the spinner through the same gate. A masked img
-    // would otherwise be silently dropped from PPTX decks (the capture
-    // walk skips visibility:hidden imgs).
-    // Attribution error tile: REPLACES the photo when an Unsplash src has
-    // no credit attribute — rendering the photo uncredited is the terms
-    // violation, so the photo must not appear at all.
-    // Calm and neutral on purpose (review feedback): the tile informs the
-    // user; the fix instructions are machine-facing (usage docblock, tool
-    // description, and the turn-end scan's bounce copy name the attributes
-    // for the agent).
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     '.attr-error{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;' +
     '  justify-content:center;gap:6px;text-align:center;padding:12px;box-sizing:border-box;' +
     '  background:#f2f1ef;color:#6e6c66;user-select:none;' +
@@ -2361,38 +2255,26 @@
       return ['shape', 'radius', 'mask', 'fit', 'placeholder', 'src', 'id', 'credit', 'credit-href'];
     }
 
-    /** Duplicate-slide hook (called by deck-stage, see its
-     *  _remintDuplicateIds): copy this id's stored image, if any, under a
-     *  freshly minted key and return that key — so a duplicated slide's
-     *  slot keeps its dropped photo instead of reverting to the
-     *  placeholder. 'isFree' is the caller's uniqueness check (document
-     *  ids); candidates must ALSO be unused in the sidecar, which can
-     *  hold keys from other pages sharing the project root. (An EMPTY
-     *  slot on another page leaves no sidecar entry, so its id is not
-     *  detectable here — a minted key can collide with it and that slot
-     *  would show this photo. Same blast radius as two pages reusing an
-     *  id by hand, which the shared sidecar already permits.) Returns null
-     *  when no id could be minted (caller strips the id, today's
-     *  behavior). */
+     
     static cloneSlot(fromId, isFree) {
       if (typeof fromId !== 'string' || !fromId) return null;
-      // Pre-hydration the store can't veto candidates or source the copy
-      // — degrade to the strip (today's behavior) rather than mint
-      // against keys we can't see yet. Any rendered (= droppable) slot
-      // means load() has already settled.
+      
+      
+      
+      
       if (!loaded) return null;
       const stem = fromId.replace(/-\d+$/, '') || fromId;
       for (let n = 2; n < 100; n++) {
         const toId = stem + '-' + n;
         if (toId === fromId) continue;
         if (slots[toId] !== undefined) {
-          // Reuse a key holding this exact value (bytes AND crop) if no
-          // live element here owns it — a duplicate op the host refused
-          // after minting leaves such a key behind, and reusing keeps
-          // refused retries from accumulating one orphaned copy per
-          // attempt. Full equality (not just bytes) so a byte-identical
-          // key another PAGE owns with its own crop is stepped past, not
-          // adopted or rewritten. (Entries without .u never match.)
+          
+          
+          
+          
+          
+          
+          
           const prev = getSlot(toId);
           const cur = getSlot(fromId);
           if (!(prev && cur && prev.u && prev.u === cur.u &&
@@ -2410,14 +2292,14 @@
 
     constructor() {
       super();
-      // clonable: rail thumbnails deep-clone slides and carry this shadow
-      // along; reuse an already-cloned root so upgrade-after-clone works.
-      // (Deliberately NOT serializable — a getHTML consumer would embed
-      // multi-MB sidecar data-URLs into serialized page HTML.)
+      
+      
+      
+      
       const root = this.shadowRoot ||
         this.attachShadow({ mode: 'open', clonable: true });
-      // .spill and .ctl sit OUTSIDE .frame so overflow:hidden + border-radius
-      // on the frame (circle, pill, rounded) can't clip them.
+      
+      
       root.innerHTML =
         '<style>' + stylesheet + '</style>' +
         '<div class="frame" part="frame">' +
@@ -2430,20 +2312,20 @@
         '  <div class="loading" part="loading"></div>' +
         '  <div class="ring" part="ring"></div>' +
         '</div>' +
-        // Outside .frame, like .spill/.ctl — the frame's overflow:hidden +
-        // border-radius/clip-path would cut the credit off on circle/pill/mask.
-        // A SPAN, not an <a>: the prescribed Unsplash credit holds two links
-        // (photographer + Unsplash), built per-render in _render().
+        
+        
+        
+        
         '<span class="credit" part="credit"></span>' +
         '<div class="spill" popover="manual" data-dc-edit-transparent>' +
         '  <img class="ghost" alt="" draggable="false">' +
         '  <div class="handle" data-c="nw"></div><div class="handle" data-c="ne"></div>' +
         '  <div class="handle" data-c="sw"></div><div class="handle" data-c="se"></div>' +
         '</div>' +
-        // data-dc-edit-transparent: the DC editor's edit-mode picker lets
-        // clicks through for chrome marked with it (EDIT_TRANSPARENT_SEL)
-        // — without it, Replace/Edit clicks in Edit mode are swallowed by
-        // element selection and the controls look dead.
+        
+        
+        
+        
         '<div class="ctl" popover="manual" data-dc-edit-transparent><button data-act="replace" title="Replace image">Replace</button>' +
         '  <button data-act="edit" title="Reframe image">Edit</button></div>' +
         '<input type="file" accept="' + ACCEPT.join(',') + '" hidden>';
@@ -2457,7 +2339,7 @@
       this._ctl = root.querySelector('.ctl');
       this._credit = root.querySelector('.credit');
       this._attrError = root.querySelector('.attr-error');
-      // Credit clicks open the link, not browse/reframe.
+      
       this._credit.addEventListener('click', (e) => e.stopPropagation());
       this._credit.addEventListener('dblclick', (e) => e.stopPropagation());
       this._ghost = root.querySelector('.ghost');
@@ -2465,40 +2347,40 @@
       this._input = root.querySelector('input');
       this._depth = 0;
       this._gen = 0;
-      // Encode-in-flight marker (the owning _ingest generation): while set,
-      // the same-src "nothing in flight" clear in _render must not fire —
-      // the stored value still points at the OLD image until the encode
-      // lands, so that clear would unmask the stale image mid-replace.
+      
+      
+      
+      
       this._swapGen = 0;
-      // Render-owned swap in flight: set when _render assigns a new src,
-      // cleared only by the img's own load/error (or the empty branch).
-      // img.complete CANNOT stand in for this — setting src only QUEUES
-      // the current-request swap (a microtask), so synchronously after an
-      // assignment, complete still reports the OLD settled request. The
-      // pick path does exactly that: the host sets src, credit, and
-      // credit-href back-to-back in one task, and renders #2/#3 would
-      // read the stale complete === true and drop the mask one render
-      // after it was set.
+      
+      
+      
+      
+      
+      
+      
+      
+      
       this._loadPending = false;
-      // See _render's empty branch: a transient attribution-error wipe of a
-      // showing image must make the follow-up render a replacement (spinner),
-      // not a first fill (blank frame).
+      
+      
+      
       this._hidShowing = false;
       this._view = { s: 1, x: 0, y: 0 };
       this._subFn = () => this._render();
-      // Shadow-DOM listeners live with the shadow DOM — bound once here so
-      // disconnect/reconnect (e.g. React remount) doesn't stack handlers.
+      
+      
       this._empty.addEventListener('click', () => this._input.click());
       root.addEventListener('click', (e) => {
         const act = e.target && e.target.getAttribute && e.target.getAttribute('data-act');
         if (!act) return;
-        // The hidden controls are opacity-0 but still tabbable — without
-        // this gate a keyboard user could drive them on a read-only share
-        // link (mirrors the dblclick handler's editable gate).
+        
+        
+        
         if (!this.hasAttribute('data-editable')) return;
         if (act === 'replace') {
           this._exitReframe(true);
-          // Host-owned picker (Unsplash modal; it also offers local import).
+          
           this.dispatchEvent(new CustomEvent('image-slot:pick', {
             bubbles: true, composed: true, detail: { id: this.id || null }
           }));
@@ -2514,12 +2396,12 @@
         if (f) this._ingest(f);
         this._input.value = '';
       });
-      // naturalWidth/Height aren't known until load — re-apply so the cover
-      // baseline is computed from real dimensions, not the 100%×100% fallback.
-      // load/error also release the replacement-in-flight mask (via the
-      // single discipline in _releaseMask): the swap is only revealed once
-      // the new image can actually paint (on error the frame shows its
-      // background, same as a fresh slot with a broken src).
+      
+      
+      
+      
+      
+      
       this._img.addEventListener('load', () => {
         this._loadPending = false;
         this._releaseMask(true);
@@ -2529,18 +2411,18 @@
         this._loadPending = false;
         this._releaseMask(true);
       });
-      // Gated only on editable — any filled slot can be repositioned/scaled,
-      // regardless of fit. Share links (no writeFile) stay static.
+      
+      
       this.addEventListener('dblclick', (e) => {
         if (!this.hasAttribute('data-editable') || !this._reframes()) return;
         e.preventDefault();
         if (this.hasAttribute('data-reframe')) this._exitReframe(true);
         else this._enterReframe();
       });
-      // Pan + resize both originate on the spill layer. A handle pointerdown
-      // drives an aspect-locked resize anchored at the opposite corner; any
-      // other pointerdown on the spill pans. Offsets are frame-% so a
-      // reframed slot survives responsive resize / PPTX export.
+      
+      
+      
+      
       this._spill.addEventListener('pointerdown', (e) => {
         if (e.button !== 0 || !this.hasAttribute('data-reframe')) return;
         e.preventDefault();
@@ -2551,9 +2433,9 @@
         const corner = e.target.getAttribute && e.target.getAttribute('data-c');
         let move;
         if (corner) {
-          // Resize about the OPPOSITE corner. Viewport-px throughout (rect
-          // fw/fh, not clientWidth) so the math survives a transform:scale()
-          // ancestor — deck_stage renders slides scaled-to-fit.
+          
+          
+          
           const iw = this._img.naturalWidth || 1, ih = this._img.naturalHeight || 1;
           const contain = (this.getAttribute('fit') || 'cover').toLowerCase() === 'contain';
           const base = contain ? Math.min(fw / iw, fh / ih) : Math.max(fw / iw, fh / ih);
@@ -2595,15 +2477,15 @@
           this.removeAttribute('data-panning');
           this._dragUp = null;
         };
-        // Stashed so _exitReframe (Escape / outside-click mid-drag) can
-        // tear the capture + listeners down synchronously.
+        
+        
         this._dragUp = up;
         this._spill.addEventListener('pointermove', move);
         this._spill.addEventListener('pointerup', up);
         this._spill.addEventListener('pointercancel', up);
       });
-      // Wheel zoom stays available inside reframe mode as a trackpad nicety —
-      // zooms toward the cursor (offset' = cursor·(1-k) + offset·k).
+      
+      
       this.addEventListener('wheel', (e) => {
         if (!this.hasAttribute('data-reframe')) return;
         e.preventDefault();
@@ -2623,8 +2505,8 @@
     }
 
     connectedCallback() {
-      // Warn once per page — an id-less slot works for the session but
-      // cannot persist, and two id-less slots would share nothing.
+      
+      
       if (!this.id && !ImageSlot._warned) {
         ImageSlot._warned = true;
         console.warn('<image-slot> without an id will not persist its dropped image.');
@@ -2634,15 +2516,15 @@
       this.addEventListener('dragleave', this);
       this.addEventListener('drop', this);
       subs.add(this._subFn);
-      // The host may inject window.omelette.writeFile AFTER the first render;
-      // re-render on hover so the editable-gated controls reliably appear.
+      
+      
       this.addEventListener('pointerenter', this._subFn);
-      // width%/height% in _applyView encode the frame aspect at call time —
-      // a host resize (responsive grid, pane divider) would stretch the
-      // image until the next _render. Re-render on size change: _render()
-      // re-seeds _view from stored before clamp/apply, so a shrink→grow
-      // cycle round-trips instead of ratcheting x/y toward the narrower
-      // frame's clamp range.
+      
+      
+      
+      
+      
+      
       this._ro = new ResizeObserver(() => this._render());
       this._ro.observe(this);
       load();
@@ -2657,10 +2539,10 @@
       this.removeEventListener('dragleave', this);
       this.removeEventListener('drop', this);
       if (this._ro) { this._ro.disconnect(); this._ro = null; }
-      // commit=false: a disconnect is not a user intent — committing here
-      // would persist whatever half-finished drag a React remount or DOM
-      // splice happened to interrupt. Deliberate exits commit on their own
-      // paths (Escape/click-out/toggle), and unloads commit via pagehide.
+      
+      
+      
+      
       this._exitReframe(false);
     }
 
@@ -2668,21 +2550,21 @@
       if (this.hasAttribute('data-reframe')) return;
       this.setAttribute('data-reframe', '');
       this._signalReframe(true);
-      // Best-effort commit when the document unloads mid-reframe (a host
-      // navigation racing the enter signal, a manual reload, tab close):
-      // the sidecar write rides the host bridge, which outlives this
-      // document, so the crop survives even though the mode dies with the
-      // DOM. Held on the instance so _exitReframe detaches exactly what
-      // was attached.
+      
+      
+      
+      
+      
+      
       this._pagehide = () => { this._exitReframe(true); flushNow(); };
       window.addEventListener('pagehide', this._pagehide);
-      // Promote spill to the top layer, then keep it pinned over the frame:
-      // scroll/resize cover the common cases, and a per-frame rect check
-      // catches layout shifts that fire neither (an image above finishing
-      // load, streamed DOM pushing the slot down, an ancestor transform
-      // change) so the overlay can't detach from the frame.
+      
+      
+      
+      
+      
       try { this._spill.showPopover(); } catch {}
-      // After the spill, so the controls stack above it in the top layer.
+      
       try { this._ctl.showPopover(); } catch {}
       this._reposition = () => { if (this.hasAttribute('data-reframe')) this._applyView(); };
       window.addEventListener('scroll', this._reposition, true);
@@ -2697,10 +2579,10 @@
       };
       this._watchId = requestAnimationFrame(this._watch);
       this._applyView();
-      // Close on click outside (the spill handler stopPropagation()s so
-      // in-image drags don't reach this) and on Escape. Listeners are held
-      // on the instance so _exitReframe / disconnectedCallback can detach
-      // exactly what was attached.
+      
+      
+      
+      
       this._outside = (e) => {
         if (e.composedPath && e.composedPath().includes(this)) return;
         this._exitReframe(true);
@@ -2735,13 +2617,13 @@
       this._signalReframe(false);
     }
 
-    // Reframe state lives only in this DOM until commit, invisible to the
-    // host's dirty signals — announce enter/exit so the host can hold
-    // auto-reloads for exactly the gesture (the guest bundle forwards
-    // image-slot:reframe to the host as imageSlotReframe). Dispatched on
-    // the element (composed, so it escapes shadow roots) while connected;
-    // a disconnected exit (disconnectedCallback) falls back to document so
-    // the host still hears it.
+    
+    
+    
+    
+    
+    
+    
     _signalReframe(active) {
       const target = this.isConnected ? this : document;
       target.dispatchEvent(new CustomEvent('image-slot:reframe', {
@@ -2750,20 +2632,20 @@
       }));
     }
 
-    // Public: host's "Import from computer" calls this to run local browse.
+    
     openFilePicker() { this._exitReframe(true); this._input.click(); }
 
-    // A src write is a newer intent for this slot's content — the host
-    // pick path (setImageSlotImage) or an agent edit — so it must win
-    // over any encode still in flight from an earlier drop: left live,
-    // that encode lands later, passes _ingest's gen guard, and its
-    // setSlot silently overwrites the pick (the stored value shadows
-    // src in _render). Bumping _gen kills the encode before its own
-    // _swapGen clear runs, so clear the dead claim here too — otherwise
-    // _releaseMask (gated on !_swapGen) never fires and the pick's
-    // spinner is stranded. src ONLY: the pick sets credit/credit-href
-    // in the same task, and clearing _swapGen on those would let the
-    // same-src branch unmask the old image mid-encode.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     attributeChangedCallback(name, oldVal, newVal) {
       if (name === 'src' && oldVal !== newVal) {
         this._gen++;
@@ -2772,19 +2654,19 @@
       if (this.shadowRoot) this._render();
     }
 
-    // handleEvent — one listener object for all four drag events keeps the
-    // add/remove symmetric and the depth counter correct.
+    
+    
     handleEvent(e) {
       if (e.type === 'dragenter' || e.type === 'dragover') {
-        // Without preventDefault the browser never fires 'drop'.
+        
         e.preventDefault();
         e.stopPropagation();
         if (e.dataTransfer) e.dataTransfer.dropEffect = 'copy';
         if (e.type === 'dragenter') this._depth++;
         this.setAttribute('data-over', '');
       } else if (e.type === 'dragleave') {
-        // dragenter/leave fire for every descendant crossing — count depth
-        // so hovering the icon inside the empty state doesn't flicker.
+        
+        
         if (--this._depth <= 0) { this._depth = 0; this.removeAttribute('data-over'); }
       } else if (e.type === 'drop') {
         e.preventDefault();
@@ -2802,18 +2684,18 @@
         this._setError('Drop a PNG, JPEG, WebP, or AVIF image.');
         return;
       }
-      // toDataUrl can take hundreds of ms on a large photo. A Clear or a
-      // newer drop during that window would be clobbered when this await
-      // resumes — bump + capture a generation so stale encodes bail.
+      
+      
+      
       const gen = ++this._gen;
-      // Replacing a shown image: surface the swap through the encode too,
-      // not just the decode — otherwise the old photo sits there with no
-      // feedback while the canvas re-encode runs. An empty slot keeps its
-      // placeholder (no spinner) until the encode lands, as before.
-      // _swapGen guards the mask against re-renders DURING the encode
-      // (pointerenter, ResizeObserver, another slot's store write): the
-      // stored value still resolves to the old image there, so _render's
-      // same-src clear would otherwise unmask it mid-replace.
+      
+      
+      
+      
+      
+      
+      
+      
       if (this.hasAttribute('data-filled')) {
         this.setAttribute('data-swapping', '');
         this._swapGen = gen;
@@ -2822,24 +2704,24 @@
         const w = this.clientWidth || this.offsetWidth || MAX_DIM;
         const url = await toDataUrl(file, w);
         if (gen !== this._gen) return;
-        // Only exit reframe once the new image is in hand — a rejected type
-        // or decode failure leaves the in-progress crop untouched.
+        
+        
         this._exitReframe(false);
-        // Clear BEFORE setSlot: its synchronous re-render must see no
-        // pending encode, so a byte-identical re-upload (same data URL, no
-        // load event coming) still clears the mask via the complete branch.
+        
+        
+        
         this._swapGen = 0;
         const val = { u: url, s: 1, x: 0, y: 0 };
         setSlot(this.id || '', val);
-        // Keep a session-local copy for id-less slots so the drop still
-        // shows, even though it cannot persist.
+        
+        
         if (!this.id) { this._local = val; this._render(); }
       } catch (err) {
         if (gen !== this._gen) return;
         this._swapGen = 0;
-        // Reveal the kept old image — unless another replacement (a
-        // remote pick's src swap) is still in flight, in which case the
-        // mask stays until THAT image settles (its load/error releases).
+        
+        
+        
         this._releaseMask();
         this._setError('Could not read that image.');
         console.warn('<image-slot> ingest failed:', err);
@@ -2856,26 +2738,26 @@
       setTimeout(() => { if (this._err === d) { d.remove(); this._err = null; } }, 3000);
     }
 
-    // Reframing (pan/resize) is available on any filled slot — the user can
-    // always reposition/scale. `fit` only sets the initial baseline (see
-    // _geom): contain starts fully-visible, cover starts frame-filling.
+    
+    
+    
     _reframes() {
       return this.hasAttribute('data-filled');
     }
 
-    // The single release discipline for the replacement-in-flight mask
-    // (data-swapping). The mask comes off only when BOTH hold:
-    //  - no encode is pending (_swapGen) — mid-encode the stored value
-    //    still resolves to the old image, so any reveal paints it;
-    //  - the frame img has settled on its current src — an unsettled src
-    //    means some replacement is still in flight (e.g. a remote pick),
-    //    whoever started it, and revealing would paint the previous
-    //    frame. The load/error listeners pass settled=true (the event IS
-    //    the settlement signal, per spec complete is true by then);
-    //    other callers rely on the complete flag (covers loaded AND
-    //    failed).
-    // Every release path funnels through here EXCEPT _render's empty
-    // branch (the img is being cleared — nothing will ever settle).
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     _releaseMask(settled) {
       if (
         !this._swapGen &&
@@ -2886,14 +2768,14 @@
       }
     }
 
-    // Baseline geometry, shared by clamp/apply/resize. `base` is the scale at
-    // view-scale s=1: cover = fill the frame (overflow on the looser axis),
-    // contain = fit fully inside (letterboxed). Zooming a contain image past
-    // s where it overflows naturally becomes a crop. Null until the img has
-    // loaded (naturalWidth is 0 before that) or when the slot has no layout
-    // box — ResizeObserver fires with a 0×0 rect under display:none, and
-    // clamping against a degenerate 1×1 frame would silently pull the stored
-    // pan toward zero.
+    
+    
+    
+    
+    
+    
+    
+    
     _geom() {
       const iw = this._img.naturalWidth, ih = this._img.naturalHeight;
       const fw = this.clientWidth, fh = this.clientHeight;
@@ -2906,7 +2788,7 @@
     }
 
     _clampView() {
-      // Pan range on each axis is half the overflow past the frame edge.
+      
       const g = this._geom();
       if (!g) return;
       const mx = Math.max(0, (g.iw * g.base * this._view.s / g.fw - 1) * 50);
@@ -2917,16 +2799,16 @@
 
     _applyView() {
       const g = this._geom();
-      // Top-layer controls: pin to the frame's top-right in viewport px
-      // (the same 8px inset as the in-frame layout; unscaled — top-layer UI
-      // reads as chrome, not page content). BEFORE the geometry branch:
-      // placement needs only the frame rect, and a not-yet-loaded or broken
-      // src must not leave the promoted strip floating unpositioned. Gated
-      // on the popover actually being open: without the Popover API,
-      // showPopover() threw (swallowed in _enterReframe), .ctl stays in
-      // its in-frame absolute layout, and viewport-px coordinates would
-      // shove it off-frame — and matches(':popover-open') itself throws
-      // there (unknown pseudo-class), hence the try/catch.
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       if (this.hasAttribute('data-reframe')) {
         let onTop = false;
         try { onTop = this._ctl.matches(':popover-open'); } catch {}
@@ -2937,8 +2819,8 @@
         }
       }
       if (!g) {
-        // Dimensions not known yet (before img load) — centered fit so there
-        // is no flash of an unpositioned image before the geometry lands.
+        
+        
         const contain = (this.getAttribute('fit') || 'cover').toLowerCase() === 'contain';
         this._img.style.width = '100%';
         this._img.style.height = '100%';
@@ -2947,10 +2829,10 @@
         this._img.style.objectFit = contain ? 'contain' : 'cover';
         return;
       }
-      // Baseline (cover-fill or contain-fit) × view scale. Width/height and
-      // left/top are all frame-% — depends only on the frame aspect ratio, so
-      // a responsive resize keeps the same crop. The spill layer mirrors the
-      // same box so its corners = image corners.
+      
+      
+      
+      
       const k = g.base * this._view.s;
       const w = (g.iw * k / g.fw * 100) + '%';
       const h = (g.ih * k / g.fh * 100) + '%';
@@ -2960,12 +2842,12 @@
       this._img.style.left = l; this._img.style.top = t;
       this._img.style.objectFit = '';
       if (this.hasAttribute('data-reframe')) {
-        // Top-layer spill: position in viewport px over the frame. The top
-        // layer escapes ancestor transforms entirely, so EVERY term must be
-        // in viewport units: getBoundingClientRect gives the frame's scaled
-        // origin AND size, and the rect/layout ratio rescales the ghost —
-        // sizing from layout px alone renders it 1/scale too large under a
-        // scaled deck slide. Inner ghost + handles stay box-relative.
+        
+        
+        
+        
+        
+        
         const r = this.getBoundingClientRect();
         const sx = g.fw ? r.width / g.fw : 1;
         const sy = g.fh ? r.height / g.fh : 1;
@@ -2979,17 +2861,17 @@
     _commitView() {
       const v = { s: this._view.s, x: this._view.x, y: this._view.y };
       if (this._userUrl) v.u = this._userUrl;
-      // Framing-only (no u) persists too so an author-src slot remembers its
-      // crop; clearing the sidecar still falls through to src=.
+      
+      
       if (this.id) setSlot(this.id, v);
       else { this._local = v; }
     }
 
     _render() {
-      // Shape / mask. Presets use border-radius so the dashed ring can
-      // follow the rounded outline; clip-path is only applied for an
-      // explicit `mask` (the ring is hidden there since a rectangle
-      // dashed border chopped by an arbitrary polygon looks broken).
+      
+      
+      
+      
       const mask = this.getAttribute('mask');
       const shape = (this.getAttribute('shape') || 'rounded').toLowerCase();
       let radius = '';
@@ -3004,21 +2886,21 @@
       this._ring.style.borderRadius = mask ? '' : radius;
       this._ring.style.display = mask ? 'none' : '';
 
-      // Controls and reframe entry gate on this so share links stay read-only.
+      
       const editable = !!(window.omelette && window.omelette.writeFile);
       this.toggleAttribute('data-editable', editable);
       this._sub.style.display = editable ? '' : 'none';
 
-      // Content. The sidecar is also writable by the agent's write_file
-      // tool, so its value isn't guaranteed canvas-originated — only accept
-      // data:image/ URLs from it. The `src` attribute is author-controlled
-      // (Claude wrote it into the HTML) so it passes through unchanged.
+      
+      
+      
+      
       let stored = this.id ? getSlot(this.id) : this._local;
       if (stored && stored.u && !/^data:image\//i.test(stored.u)) stored = null;
       const srcAttr = this.getAttribute('src') || '';
       this._userUrl = (stored && stored.u) || null;
       const url = this._userUrl || srcAttr;
-      // Don't clobber an in-flight reframe with a store-triggered re-render.
+      
       if (!this.hasAttribute('data-reframe')) {
         this._view = {
           s: stored && Number.isFinite(stored.s) ? clampS(stored.s) : 1,
@@ -3027,16 +2909,16 @@
         };
       }
       this._cap.textContent = this.getAttribute('placeholder') || 'Drop an image';
-      // Toggle via style.display — the [hidden] attribute alone loses to
-      // the display:flex / display:block rules in the stylesheet above.
-      // An Unsplash src with no credit attribute must NOT render — showing
-      // the photo uncredited is the Unsplash-terms violation itself. The
-      // error tile replaces the photo until the credit is written. A
-      // user-dropped image is the user's own content and always renders.
-      // Trimmed: credit is agent/user-editable content, and a whitespace-
-      // only value must count as missing — otherwise it would suppress the
-      // error tile AND render an empty credit box (no text, no links),
-      // exactly the unattributed state this gate exists to prevent.
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       const credit = (this.getAttribute('credit') || '').trim();
       const attrError = !!(
         !credit && !this._userUrl && srcAttr && isUnsplashHost(srcAttr)
@@ -3045,25 +2927,25 @@
       if (url && !attrError) {
         const prev = this._img.getAttribute('src');
         if (prev !== url) {
-          // Replacing an already-shown image: mark the swap BEFORE setting
-          // src so the stale frame is never revealed (see the data-swapping
-          // stylesheet rules). First fill (prev empty) keeps the existing
-          // placeholder-until-load behavior — no spinner. _hidShowing
-          // covers the pick path's transient attribution-error wipe: prev
-          // is gone, but an image WAS showing, so this is a replacement.
+          
+          
+          
+          
+          
+          
           if (prev || this._hidShowing) this.setAttribute('data-swapping', '');
-          // Mark the swap BEFORE assigning src: complete keeps reporting
-          // the old settled request until the browser's
-          // update-the-image-data microtask runs, so same-task re-renders
-          // (the pick path's credit/credit-href setAttributes) need this
-          // flag, not complete, to know a load is in flight.
+          
+          
+          
+          
+          
           this._loadPending = true;
           this._img.src = url;
           this._ghost.src = url;
         } else {
-          // Same-src re-render — release if settled, so an ingest-set
-          // spinner can't stick after a byte-identical re-upload (same
-          // data URL, no further load event ever fires).
+          
+          
+          
           this._releaseMask();
         }
         this._hidShowing = false;
@@ -3074,31 +2956,31 @@
         this._applyView();
       } else {
         this.removeAttribute('data-swapping');
-        // The src is being removed — no load/error will ever fire for it.
+        
         this._loadPending = false;
-        // A transient attribution-error wipe of a showing image happens on
-        // the pick path: the host sets src one setAttribute before credit,
-        // so render N hides the old image (attrError) and render N+1
-        // restores a URL. Remember the wipe so that restore renders as a
-        // replacement (spinner), not a first fill (blank frame).
+        
+        
+        
+        
+        
         this._hidShowing = attrError && !!this._img.getAttribute('src');
         this._img.style.display = 'none';
         this._img.removeAttribute('src');
         this._ghost.removeAttribute('src');
-        // The error tile owns the blocked-photo state; .empty stays for
-        // the genuinely-empty slot.
+        
+        
         this._empty.style.display = attrError ? 'none' : 'flex';
         this.removeAttribute('data-filled');
       }
 
-      // Credit belongs to the author src, so a user drop hides it.
-      // textContent + the http(s)-only funnel keep external strings inert.
+      
+      
       const showCredit = !!(url && credit && !this._userUrl && !attrError);
       this._credit.textContent = '';
       if (showCredit) {
-        // Validate once (resolved against the document, http(s) only),
-        // then append the terms-required utm referral params to links
-        // that point back at unsplash.com.
+        
+        
+        
         let href = '';
         const rawHref = this.getAttribute('credit-href') || '';
         if (rawHref) {
@@ -3117,10 +2999,10 @@
           a.textContent = text;
           return a;
         };
-        // Unsplash's prescribed credit is TWO links — the photographer's
-        // name to their profile (credit-href) and 'Unsplash' to the
-        // homepage. Render that split whenever the text has the canonical
-        // shape; other text keeps the legacy single-link rendering.
+        
+        
+        
+        
         const m = /^Photo by (.+) on Unsplash$/.exec(credit);
         if (m) {
           this._credit.appendChild(document.createTextNode('Photo by '));
@@ -4586,28 +4468,28 @@ class Component extends DCLogic {
     this.setState({ cmd: (this.state.cmd + 1) % (d.cmds.length + 1) });
   };
 
-  // keys (skill_group__task, see assets/data/wall_clip_manifest.csv) whose clips have been published; drives the ▶ marker and the count
+  
   WALL_CLIPS = ["close__kettle_lid", "fold__towel_one_arm", "pass__ball_rtol", "place__pen_to_pen_holder", "pull__open_drawer", "pull__tissue_from_bag", "separate__pen_cap_off", "stack__cola_on_cola", "stack__cup_on_cup", "straighten__water_bottle", "straighten__water_bottle_2", "wipe__plate_with_rag", "wipe__stain_with_sponge"];
-  // G2-90D recordings of the same task suite (assets/video/wall_g2/<key>.mp4), cut with _build/picker_wall
+  
   WALL_CLIPS_G2 = ["insert__straw_to_cup", "pass__sponge_eraser_ltor", "pick__marker_pen_in_cup", "pick__tooth_brush", "pick__towel_from_rod", "pick__whisk", "pour__fruits_to_plate", "press__stapler", "separate__pen_cap_off", "stack__cola_on_cola", "stack__cube_on_block", "wipe__stain_with_sponge"];
-  // which guide line the table edge sits on (sixths from the bottom), from the picker; the grid groups tiles by it
+  
   WALL_AL = {"wall/close__kettle_lid": 3, "wall/fold__towel_one_arm": 3, "wall/pass__ball_rtol": 1, "wall/place__pen_to_pen_holder": 2, "wall/pull__open_drawer": 3, "wall/pull__tissue_from_bag": 3, "wall/separate__pen_cap_off": 3, "wall/stack__cola_on_cola": 3, "wall/stack__cup_on_cup": 2, "wall/straighten__water_bottle": 1, "wall/straighten__water_bottle_2": 3, "wall/wipe__plate_with_rag": 3, "wall/wipe__stain_with_sponge": 3, "wall_g2/insert__straw_to_cup": 3, "wall_g2/pass__sponge_eraser_ltor": 2, "wall_g2/pick__marker_pen_in_cup": 3, "wall_g2/pick__tooth_brush": 3, "wall_g2/pick__towel_from_rod": 3, "wall_g2/pick__whisk": 3, "wall_g2/place__mango_to_box": 1, "wall_g2/pour__fruits_to_plate": 3, "wall_g2/press__stapler": 3, "wall_g2/separate__pen_cap_off": 3, "wall_g2/stack__cola_on_cola": 3, "wall_g2/stack__cube_on_block": 2, "wall_g2/wipe__stain_with_sponge": 3};
-  // recordings of tasks outside the 100-task wall (shown in the grid, no wall row)
+  
   WALL_EXTRA = [{"slug": "wall_g2/place__mango_to_box", "key": "place__mango_to_box", "emb": "G2-90D", "fam": "place", "label": "mango → box"}];
-  // playback speed baked into each clip by the encoder: up to 6 s 1x, 6-12 s 2x, 12-18 s 3x, longer 5x; shown on the tile and in the lightbox
+  
   WALL_SPEED = {"wall/close__kettle_lid": 2.0, "wall/fold__towel_one_arm": 5.0, "wall/pass__ball_rtol": 5.0, "wall/place__pen_to_pen_holder": 3.0, "wall/pull__open_drawer": 3.0, "wall/pull__tissue_from_bag": 5.0, "wall/separate__pen_cap_off": 3.0, "wall/stack__cola_on_cola": 5.0, "wall/stack__cup_on_cup": 5.0, "wall/straighten__water_bottle": 5.0, "wall/straighten__water_bottle_2": 5.0, "wall/wipe__plate_with_rag": 5.0, "wall/wipe__stain_with_sponge": 5.0, "wall_g2/insert__straw_to_cup": 3.0, "wall_g2/pass__sponge_eraser_ltor": 3.0, "wall_g2/pick__marker_pen_in_cup": 2.0, "wall_g2/pick__tooth_brush": 2.0, "wall_g2/pick__towel_from_rod": 3.0, "wall_g2/pick__whisk": 2.0, "wall_g2/place__mango_to_box": 3.0, "wall_g2/pour__fruits_to_plate": 2.0, "wall_g2/press__stapler": 3.0, "wall_g2/separate__pen_cap_off": 3.0, "wall_g2/stack__cola_on_cola": 2.0, "wall_g2/stack__cube_on_block": 5.0, "wall_g2/wipe__stain_with_sponge": 2.0};
-  // explicit tile order per robot from the order tool (assets/data/wall_order.json); unlisted clips follow
+  
   WALL_ORDER = ["wall/straighten__water_bottle", "wall/pass__ball_rtol", "wall/stack__cup_on_cup", "wall/place__pen_to_pen_holder", "wall/stack__cola_on_cola", "wall/fold__towel_one_arm", "wall/wipe__stain_with_sponge", "wall/separate__pen_cap_off", "wall/pull__tissue_from_bag", "wall/pull__open_drawer", "wall/wipe__plate_with_rag", "wall/close__kettle_lid", "wall/straighten__water_bottle_2", "wall_g2/pick__marker_pen_in_cup", "wall_g2/pick__tooth_brush", "wall_g2/pick__whisk", "wall_g2/separate__pen_cap_off", "wall_g2/stack__cola_on_cola", "wall_g2/pick__towel_from_rod", "wall_g2/pour__fruits_to_plate", "wall_g2/wipe__stain_with_sponge", "wall_g2/pass__sponge_eraser_ltor", "wall_g2/insert__straw_to_cup", "wall_g2/press__stapler", "wall_g2/stack__cube_on_block", "wall_g2/place__mango_to_box"];
   wallKey(fam, label) { const sl = (t) => t.toLowerCase().replace(/\u2192/g, 'to').replace(/[\u2019']/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, ''); return sl(fam) + '__' + sl(label); }
 
-  // sequence player (#language, block 2): cue times (s, clip time) were read from 1 fps frame sheets; wording provisional until confirmed by the operator
+  
   DEMO_CLIPS = [
     { slug: 'stack_three_objects', tab: 'Stack three objects', emb: 'G1-OP', len: '0:48', dur: 48.5, note: 'One uninterrupted rollout; the second command is issued once the first is complete. Released 30,000-hour model, zero-shot, shown at 3\u00d7 playback. Illustrative; not part of the scored evaluation.', cues: [{ t: 0, text: 'Put the bowl on the plate.' }, { t: 24.0, text: 'Put the cup on the bowl.' }] },
     { slug: 'sort_fruit_by_colour', tab: 'Sort fruit by colour', emb: 'G1-OP', len: '0:35', dur: 35.0, note: 'One uninterrupted rollout; the second command is issued once the first is complete. Released 30,000-hour model, zero-shot, shown at 3\u00d7 playback. Illustrative; not part of the scored evaluation.', cues: [{ t: 0, text: 'Pick up the green apple and put it on the green plate.' }, { t: 19.5, text: 'Pick up the orange and put it on the orange plate.' }] },
     { slug: 'sort_cubes_by_colour_g2', tab: 'Sort cubes \u00b7 G2-90D', emb: 'G2-90D', len: '0:49', dur: 49.0, note: 'One uninterrupted rollout on the second embodiment; the second command is issued once the first is complete. Released 30,000-hour model, zero-shot, shown at 3\u00d7 playback. Illustrative; not part of the scored evaluation.', cues: [{ t: 0, text: 'Pick up the red cube and put it into the red box.' }, { t: 27.5, text: 'Pick up the blue cube and put it into the blue box.' }] }
   ];
   demoTime = (e) => {
-    this.applyRate('demos/' + ((e.currentTarget.currentSrc || '').match(/demos\/([^/?]+)\.mp4/) || [])[1], e.currentTarget);   // autoplay clips can fire loadeddata before the handlers are bound
+    this.applyRate('demos/' + ((e.currentTarget.currentSrc || '').match(/demos\/([^/?]+)\.mp4/) || [])[1], e.currentTarget);   
     const el = e.currentTarget; this.demoEl = el;
     if (this.demoPendingSeek != null && el.readyState >= 2) { if (Math.abs(el.currentTime - this.demoPendingSeek) > 1.5) { el.currentTime = this.demoPendingSeek; return; } this.demoPendingSeek = null; }
     const d = this.DEMO_CLIPS[this.state.demoPick] || this.DEMO_CLIPS[0]; const t = el.currentTime; let i = 0;
@@ -4621,11 +4503,11 @@ class Component extends DCLogic {
   demoVideoEl = () => { let el = this.demoEl; if (!el || !el.isConnected) { el = document.querySelector('[data-r="lang"] video'); this.demoEl = el; } return el; };
   demoSeek = (t) => () => { this.demoPendingSeek = t; const el = this.demoVideoEl(); if (el && el.readyState >= 1) { try { el.currentTime = t; } catch (err) {} const p = el.play(); if (p && p.catch) p.catch(() => {}); } };
   demoReady = (slug) => (e) => { this.demoEl = e.currentTarget; this.applyRate(slug, e.currentTarget); if (this.demoPendingSeek != null) { try { e.currentTarget.currentTime = this.demoPendingSeek; } catch (err) {} } this.video(slug).onReady(e); };
-  // two-up sequence clips: each video reports its time; the overlay highlights the command active at that moment
+  
   seqTime = (d) => (e) => { this.applyRate('demos/' + d.slug, e.currentTarget); const t = e.currentTarget.currentTime; let k = 0; for (let i = 0; i < d.cues.length; i++) if (t >= d.cues[i].t - 0.05) k = i; const cur = (this.state.seqCue || {})[d.slug] || 0; if (cur !== k) this.setState({ seqCue: Object.assign({}, this.state.seqCue || {}, { [d.slug]: k }) }); };
   demoPickTab = (i) => () => { this.demoEl = null; this.demoPendingSeek = null; clearTimeout(this.demoFlashTimer); this.setState({ demoPick: i, demoCue: 0, demoFlash: false }); };
 
-  // #language section
+  
   LANG = [
     { slug: 'pick_blue_cup', label: 'blue cup', instr: 'Pick up the blue cup.', dot: 'oklch(0.62 0.14 240)' },
     { slug: 'pick_yellow_cup', label: 'yellow cup', instr: 'Pick up the yellow cup.', dot: 'oklch(0.86 0.17 95)' },
@@ -4647,7 +4529,7 @@ class Component extends DCLogic {
   ];
 
   VIDEOS = [
-    // studio recordings (filmed-videos, 2026-08-31 / 09-01), cut by _build/encode_filmed.py; released 30,000-hour model
+    
     { slug: 'lang/pick_blue_cup', aspect: '16 / 9', len: '0:21', label: 'Pick up the blue cup', caption: 'Pick up the blue cup \u00b7 G1-OP' },
     { slug: 'lang/pick_yellow_cup', aspect: '16 / 9', len: '0:25', label: 'Pick up the yellow cup', caption: 'Pick up the yellow cup \u00b7 G1-OP' },
     { slug: 'lang/pick_pink_cup', aspect: '16 / 9', len: '0:15', label: 'Pick up the pink cup', caption: 'Pick up the pink cup \u00b7 G1-OP' },
@@ -4656,7 +4538,7 @@ class Component extends DCLogic {
     { slug: 'demos/sort_fruit_by_colour', aspect: '16 / 9', len: '0:35', label: 'Sort fruit by colour', caption: 'Green apple to the green plate, orange to the orange plate \u00b7 G1-OP' },
     { slug: 'demos/sort_cubes_by_colour_g2', aspect: '16 / 9', len: '0:49', label: 'Sort cubes by colour', caption: 'Red cube into the red box, blue cube into the blue box \u00b7 G2-90D' },
     { slug: 'conflicts/changing_instructions', aspect: '16 / 9', len: '0:36', label: 'Repeated redirection', caption: 'Green cup, then the blue cup instead, then the red cup instead \u00b7 G1-OP' },
-    // same scene, six objects (filmed-videos/lang2, cut with _build/encode_lang2.py from the picker table)
+    
     { slug: 'lang2/pick_badminton', aspect: '16 / 9', len: '0:14', label: 'Pick up the shuttlecock', caption: 'Pick up the shuttlecock \u00b7 G1-OP' },
     { slug: 'lang2/pick_green_tape', aspect: '16 / 9', len: '0:11', label: 'Pick up the green tape', caption: 'Pick up the green tape \u00b7 G1-OP' },
     { slug: 'lang2/pick_screwdriver', aspect: '16 / 9', len: '0:15', label: 'Pick up the screwdriver', caption: 'Pick up the screwdriver \u00b7 G1-OP' },
@@ -4675,20 +4557,20 @@ class Component extends DCLogic {
   ];
 
   markFailed = (slug) => { if (this.state.vFail[slug]) return; this.setState({ vFail: { ...this.state.vFail, [slug]: true } }); };
-  // conflict cards: freeze on the first frame (the set-up matters), play only while hovered
+  
   hoverPlay = (e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); } };
-  hoverPause = (e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.pause(); try { v.currentTime = 0; } catch (err) {} } };   // un-hover: back to the first frame
+  hoverPause = (e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.pause(); try { v.currentTime = 0; } catch (err) {} } };   
   confEnter = (slug) => (e) => { this.hoverPlay(e); if (this.state.confHover !== slug) this.setState({ confHover: slug }); };
   confLeave = (slug) => (e) => { this.hoverPause(e); if (this.state.confHover === slug || (this.state.confCue || {})[slug]) this.setState({ confHover: null, confCue: Object.assign({}, this.state.confCue || {}, { [slug]: 0 }) }); };
-  // instruction line under the bias clips (film-style): {t, text} = a command is issued, {t, cancel} = the previous one is withdrawn.
-  // Times are clip seconds (the picker stores them in source time; _build/picker_wall/sync_page.py rewrites this constant).
+  
+  
   CONF_CUES = {"arm_switch": [{"t": 0.0, "text": "Pick up the red apple with the right arm."}, {"cancel": true, "t": 1.51}, {"t": 2.61, "text": "Pick up the orange with the left arm."}], "changing_instructions": [{"t": 0.0, "text": "Pick up the green cup."}, {"cancel": true, "t": 1.7}, {"t": 6.05, "text": "Pick up the blue cup."}, {"cancel": true, "t": 15.26}, {"t": 21.55, "text": "Pick up the red cup."}], "cup_into_shoebox": [{"t": 0.0, "text": "Put the cup into the shoebox."}]};
   cueIndex(cues, t) { let k = 0; for (let i = 0; i < cues.length; i++) if (t >= cues[i].t - 0.05) k = i; return k; }
   cueVals(cues, k) { const c = cues[Math.min(k, cues.length - 1)] || {}; return { cueOn: cues.length > 0, cueText: c.cancel ? 'CANCEL' : (c.text || ''), cueKind: c.cancel ? 'cancel' : 'cmd', cueP: k === 0 ? 'i' : String(k % 2) }; }
   confTime = (slug) => (e) => { const cues = this.CONF_CUES[slug]; if (!cues || !cues.length) return; const k = this.cueIndex(cues, e.currentTarget.currentTime); if (((this.state.confCue || {})[slug] || 0) !== k) this.setState({ confCue: Object.assign({}, this.state.confCue || {}, { [slug]: k }) }); };
   onLightTime = (e) => { const s = this.state.light || ''; if (s.indexOf('conflicts/') !== 0) return; const cues = this.CONF_CUES[s.slice(10)]; if (!cues || !cues.length) return; const k = this.cueIndex(cues, e.currentTarget.currentTime); if ((this.state.lightCue || 0) !== k) this.setState({ lightCue: k }); };
   stillReady = (slug) => (e) => { if (e && e.currentTarget) this.applyRate(slug, e.currentTarget); if (!this.state.vReady[slug]) this.setState({ vReady: Object.assign({}, this.state.vReady, { [slug]: true }) }); };
-  // left table of contents (wide screens): active item follows the scroll position
+  
   TOC = [{ id: 'data-utilization', label: 'Data utilization' }, { id: 'data-scaling', label: 'Data scaling' }, { id: 'instruction-following', label: 'Instruction following' },
          { id: 'method', label: 'Method' }, { id: 'coae', label: 'CoAE', sub: true }, { id: 'svp', label: 'SVP', sub: true }, { id: 'kaso', label: 'KASO', sub: true },
          { id: 'deployment', label: 'Real-time inference' },
@@ -4701,15 +4583,15 @@ class Component extends DCLogic {
   onToggleLang = () => this.setState({ lang: this.state.lang === 'en' ? 'zh' : 'en' });
   playMuted = (e) => { const el = e.currentTarget; el.muted = true; const p = el.play(); if (p && p.catch) p.catch(() => {}); };
   openLight = (slug) => () => this.setState({ light: slug, lightCue: 0 });
-  // project film: two full cuts of the same film, chosen by the page language (EN -> English subtitles, \u4e2d -> English + Chinese)
+  
   filmSrc() { return this.FILM_BASE + (this.state.lang === 'zh' ? 'pr_film_zh' : 'pr_film') + '.mp4' + this.assetVer('pr_film'); }
-  // hero film controls: autoplay muted + loop; the bar under the picture toggles play, seeks, mutes, goes full screen (native controls while full screen)
+  
   filmEl = () => document.querySelector('[data-r="film-video"]');
   mmss(t) { t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); }
   onFilmReady = (e) => {
       const v = e.currentTarget; v.muted = !!this.state.filmMuted;
       this.setState({ filmT: 0, filmDur: v.duration || 0, filmPlaying: !v.paused });
-    if (!this.filmIO && 'IntersectionObserver' in window) {   // off screen: pause; back on screen: resume unless the reader paused it
+    if (!this.filmIO && 'IntersectionObserver' in window) {   
       this.filmIO = new IntersectionObserver((en) => { en.forEach((x) => { if (x.isIntersecting) { if (this._filmWasPlaying === true && v.paused) { const q = v.play(); if (q && q.catch) q.catch(() => {}); } } else { this._filmWasPlaying = !v.paused; if (!v.paused) v.pause(); } }); }, { rootMargin: '120px 0px' });
       this.filmIO.observe(v);
     }
@@ -4725,28 +4607,28 @@ class Component extends DCLogic {
   onFsChange = () => { const v = this.filmEl(); if (v && !document.fullscreenElement) v.controls = false; };
 
   closeLight = () => this.setState({ light: null });
-  // recordings grid: hover plays the muted clip (unless the visitor prefers reduced motion); the hovered task lights up in the wall
-  // horizontal strips: scroll the row by most of its visible width
+  
+  
   stripScroll = (dir) => (e) => { const strip = e.currentTarget.closest('[data-r="strip-wrap"]').querySelector('[data-r="strip"]'); if (strip) strip.scrollBy({ left: dir * Math.max(240, strip.clientWidth * 0.9), behavior: 'smooth' }); };
   rollEnter = (key) => (e) => { const v = e.currentTarget.querySelector('video'); if (v && !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) { v.muted = true; const p = v.play(); if (p && p.catch) p.catch(() => {}); } if (this.state.rollHover !== key) this.setState({ rollHover: key }); };
-  rollLeave = (key) => (e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.pause(); try { v.currentTime = 0; } catch (err) {} } if (this.state.rollHover === key) this.setState({ rollHover: null }); };   // un-hover: back to the first frame
-  // wall clips are re-cut under the same file names (picker_wall); bump this when they change so browsers refetch
+  rollLeave = (key) => (e) => { const v = e.currentTarget.querySelector('video'); if (v) { v.pause(); try { v.currentTime = 0; } catch (err) {} } if (this.state.rollHover === key) this.setState({ rollHover: null }); };   
+  
   ASSET_VER = '20260907z';
-  FILM_BASE = 'https://pub-69e403b6390243e0b653e9664adf859c.r2.dev/'; /* hero film host: keep relative for GitHub; set to the Cloudflare R2 public URL with a trailing slash (e.g. 'https://media.example.com/') to serve pr_film.mp4 / pr_film_zh.mp4 from R2 */
-  assetVer(slug) { return '?v=' + this.ASSET_VER; }   // every clip: re-cuts keep their file name, so the tag is what busts caches
+  FILM_BASE = 'https://pub-69e403b6390243e0b653e9664adf859c.r2.dev/';  
+  assetVer(slug) { return '?v=' + this.ASSET_VER; }   
   speedLabel(f) { return (Math.abs(f - Math.round(f)) < 0.01 ? String(Math.round(f)) : f.toFixed(1)) + '\u00d7'; }
-  // one chip rule for every video: bottom-left row = robot · playback speed · AUTONOMOUS · ZERO-SHOT (top-left stays free for content)
-  // playback rate per page clip (files are real-time; the chip, the legend and the lightbox follow this map)
+  
+  
   RATE = { 'demos/fill_plate': 3, 'demos/sort_fruit_by_colour': 3, 'demos/sort_cubes_by_colour_g2': 3, 'conflicts/target_switch': 2, 'conflicts/arm_switch': 2, 'conflicts/changing_instructions': 3, 'conflicts/cup_into_shoebox': 2 };
-  // long-horizon clip: four commands in one continuous rollout; cue times are media time of the encoded clip (cues.html annotates them)
+  
   LH = { slug: 'fill_plate', emb: 'G1-OP', len: '1:24', dur: 84.3, merged: 'Put food into the tray', mergeAt: 82.8, hold: 5000,
     cues: [{ t: 0, text: 'Pick up the apple and put it into the bowl.', rate: 3 }, { t: 21, text: 'Pick up the mango and put it into the bowl.', rate: 3 }, { t: 40, text: 'Pick up the snack bag and put it on the tray.', rate: 3 }, { t: 51, text: 'Pick up the snack bag and put it on the tray.', rate: 5 }, { t: 66, text: 'Pick up the bottle and put it on the tray.', rate: 3 }] };
-  // panel rows: consecutive cues with the same text collapse into one row (start = first cue, end = next row's start)
+  
   lhRows = () => { const rows = []; this.LH.cues.forEach((c, i) => { const last = rows[rows.length - 1]; if (last && last.text === c.text) last.idx.push(i); else rows.push({ text: c.text, t: c.t, idx: [i] }); }); rows.forEach((r, k) => { r.end = k + 1 < rows.length ? rows[k + 1].t : this.LH.dur; }); return rows; };
   lhEl = () => document.querySelector('[data-r="lh"] video');
-  lhEnded = () => { this.setState({ lhMerged: true }); clearTimeout(this._lhHold); this._lhHold = setTimeout(() => { const el = this.lhEl(); if (!el || !el.ended) return; const r = el.getBoundingClientRect(); const onScreen = r.bottom > -240 && r.top < window.innerHeight + 240; try { el.currentTime = 0; if (onScreen) { const p = el.play(); if (p && p.catch) p.catch(() => {}); } } catch (err) {} this.setState({ lhMerged: false, lhCue: 0 }); }, this.LH.hold || 2800); }; // finished: show the merged card for LH.hold, then loop (the in-view observer handles off-screen)
+  lhEnded = () => { this.setState({ lhMerged: true }); clearTimeout(this._lhHold); this._lhHold = setTimeout(() => { const el = this.lhEl(); if (!el || !el.ended) return; const r = el.getBoundingClientRect(); const onScreen = r.bottom > -240 && r.top < window.innerHeight + 240; try { el.currentTime = 0; if (onScreen) { const p = el.play(); if (p && p.catch) p.catch(() => {}); } } catch (err) {} this.setState({ lhMerged: false, lhCue: 0 }); }, this.LH.hold || 2800); }; 
   lhReady = (e) => { const el = e.currentTarget; this.applyRate('demos/fill_plate', el); this.stillReady('demos/fill_plate')(e); if (!this._lhHover) { try { el.currentTime = 0; } catch (err) {} } };
-  lhEnter = () => { this._lhHover = true; }; // playback is driven by the in-view observer, not by hover
+  lhEnter = () => { this._lhHover = true; }; 
   lhLeave = () => { this._lhHover = false; };
   lhSeek = (t) => () => { const el = this.lhEl(); if (!el) return; this._lhHover = true; try { el.currentTime = t; const p = el.play(); if (p && p.catch) p.catch(() => {}); } catch (err) {} this.setState({ lhMerged: false }); };
   lhRate = (t) => { let r = this.LH.cues[0].rate || this.RATE['demos/fill_plate'] || 1; for (const c of this.LH.cues) if (t >= c.t - 0.05) r = c.rate || r; return r; };
@@ -4798,24 +4680,24 @@ class Component extends DCLogic {
   componentDidMount() {
     document.addEventListener('keydown', this.onKey);
     document.addEventListener('fullscreenchange', this.onFsChange);
-    // lazy video loading: start a slot clip only when it is near the viewport, pause it when it leaves
+    
     const startEl = (el) => { if (el.preload !== 'auto') el.preload = 'auto'; el.muted = true; const p = el.play(); if (p && p.catch) p.catch(() => {}); };
     this.lazyIO = ('IntersectionObserver' in window) ? new IntersectionObserver((entries) => {
       entries.forEach((en) => { if (en.isIntersecting) startEl(en.target); else if (!en.target.paused) en.target.pause(); });
     }, { rootMargin: '240px 0px' }) : null;
-    // data-lazy="warm": fetch (never play) once the card is within ~900 px; keeps the six off-screen clips out of the page-open download
+    
     const warmEl = (el) => { if (el.__warm) return; el.__warm = true; el.preload = 'auto'; if (el.readyState === 0) { try { el.load(); } catch (err) {} } };
     this.warmIO = ('IntersectionObserver' in window) ? new IntersectionObserver((entries) => {
       entries.forEach((en) => { if (en.isIntersecting) { warmEl(en.target); this.warmIO.unobserve(en.target); } });
     }, { rootMargin: '900px 0px' }) : null;
     this.scanLazy = () => { document.querySelectorAll('video[data-lazy]').forEach((el) => { if (el.__lazy) return; el.__lazy = true; if (el.getAttribute('data-lazy') === 'warm') { if (this.warmIO) this.warmIO.observe(el); else warmEl(el); } else if (this.lazyIO) this.lazyIO.observe(el); else startEl(el); }); };
     this.scanLazy();
-    /* deep links (#coae, #kaso, ...): the browser jumps before this page hydrates, so re-run the jump once the target exists */
+     
     const hashId = decodeURIComponent((location.hash || "").slice(1));
     if (hashId) {
       let stop = false; const cancelJump = () => { stop = true; };
       ["wheel", "touchstart", "keydown"].forEach((e) => window.addEventListener(e, cancelJump, { once: true, passive: true }));
-      const rootStyle = document.documentElement.style, prevBehavior = rootStyle.scrollBehavior; rootStyle.scrollBehavior = "auto"; /* the page scrolls smoothly; the jump must be instant or the retries restart the animation */
+      const rootStyle = document.documentElement.style, prevBehavior = rootStyle.scrollBehavior; rootStyle.scrollBehavior = "auto";  
       const t0 = Date.now(); let lastTop = null;
       const finish = () => { clearInterval(hj); rootStyle.scrollBehavior = prevBehavior; };
       const hj = setInterval(() => {
@@ -4983,7 +4865,7 @@ class Component extends DCLogic {
         cueText: dm.cues[dcue].text, cueCounter: 'INSTRUCTION ' + (dcue + 1) + ' / ' + dm.cues.length,
         chipStyle: 'position: absolute; left: 12px; top: 12px; max-width: calc(100% - 24px); display: flex; flex-direction: column; gap: 3px; border-radius: 8px; padding: 8px 12px; font-size: 14px; line-height: 1.35; color: oklch(0.985 0.002 250); transition: background 320ms ease; background: ' + (this.state.demoFlash ? 'oklch(0.500 0.195 265 / 0.94)' : 'oklch(0.255 0.008 255 / 0.72)') + ';'
       })],
-      demoSegs: dm.cues.map((c, k) => { const end = k + 1 < dm.cues.length ? dm.cues[k + 1].t : dm.dur; const bg = k < dcue ? 'oklch(0.777 0.079 265)' : k === dcue ? 'oklch(0.500 0.195 265)' : 'oklch(0.90 0.005 250)'; return { style: 'flex: 1 1 0; height: 4px; border-radius: 2px; background: ' + bg + '; transition: background 320ms ease;' }; /* equal segments, one per command (user) */ }),
+      demoSegs: dm.cues.map((c, k) => { const end = k + 1 < dm.cues.length ? dm.cues[k + 1].t : dm.dur; const bg = k < dcue ? 'oklch(0.777 0.079 265)' : k === dcue ? 'oklch(0.500 0.195 265)' : 'oklch(0.90 0.005 250)'; return { style: 'flex: 1 1 0; height: 4px; border-radius: 2px; background: ' + bg + '; transition: background 320ms ease;' };   }),
       demoSteps: dm.cues.map((c, k) => ({ n: String(k + 1), text: c.text, onSeek: this.demoSeek(c.t), style: k === dcue ? STEP_ON : (k < dcue ? STEP_DONE : STEP_OFF), numStyle: NUM_BASE + (k === dcue ? 'background: oklch(0.500 0.195 265); color: oklch(0.985 0.002 250);' : k < dcue ? 'background: oklch(0.908 0.070 262); color: oklch(0.330 0.150 268);' : 'background: oklch(0.93 0.005 250); color: oklch(0.45 0.008 255);') })),
       demoTag: dm.cues.length + ' COMMANDS \u00b7 ' + dm.len,
       demoHint: 'select a step to jump to it',
@@ -5005,7 +4887,7 @@ class Component extends DCLogic {
     };
 
     const SPX = [10, 70, 130, 190];
-    const sy = (v) => Math.round((112 - v * 1.0) * 10) / 10;   // 0 -> 112, 100 -> 12 (dashed top line = 100 %)
+    const sy = (v) => Math.round((112 - v * 1.0) * 10) / 10;   
     const allRows = this.DATA.flatMap((t) => t[2]);
     const suite = this.famMean(allRows);
     const g2All = this.DATA.flatMap(([nm]) => {
@@ -5033,7 +4915,7 @@ class Component extends DCLogic {
     this.tocBind();
     const secParent = { coae: 'method', svp: 'method', kaso: 'method' }; const secActive = secParent[this.state.tocActive] || this.state.tocActive;
     const secLabel = (t) => this.state.lang === 'zh' ? (ZH_BODY[t.label] || t.label) : t.label;
-    // top bar: one pill per section; Method carries a hover menu with CoAE / SVP / KASO
+    
     const secItems = this.TOC.filter((t) => !t.sub).map((t) => { const subs = this.TOC.filter((u) => u.sub && secParent[u.id] === t.id).map((u) => ({ href: '#' + u.id, label: secLabel(u), on: this.state.tocActive === u.id ? '1' : '' })); return { href: '#' + t.id, label: secLabel(t), on: secActive === t.id ? '1' : '', hasSubs: subs.length > 0, subs }; });
     const tocItems = this.TOC.map((t) => ({ href: '#' + t.id, label: this.state.lang === 'zh' ? (ZH_BODY[t.label] || t.label) : t.label, sub: t.sub ? '1' : '', on: this.state.tocActive === t.id ? '1' : '',
       style: 'display: block; text-decoration: none; padding: 6px 0 6px ' + (t.sub ? 32 : 14) + 'px; border-left: 2px solid oklch(0.90 0.006 250); font-size: ' + (t.sub ? 14 : 15) + 'px; line-height: 1.4; color: oklch(0.50 0.008 255); transition: color 160ms ease, border-color 160ms ease;' }));
@@ -5065,7 +4947,7 @@ class Component extends DCLogic {
     { const O = this.WALL_ORDER || [], sk = (t) => (t.emb === 'G1-OP' ? 'wall/' : 'wall_g2/') + t.key; rollAll.forEach((t, i) => { t._i = i; });
       rollAll.sort((a, b) => { const ra = O.indexOf(sk(a)), rb = O.indexOf(sk(b)); const ka = ra < 0 ? 1e6 + a._i : ra, kb = rb < 0 ? 1e6 + b._i : rb; return ka - kb; }); }
     const speeds = rollAll.length ? rollAll.map((t) => t.speed) : [1], sMin = Math.min.apply(null, speeds), sMax = Math.max.apply(null, speeds);
-    const speedRange = sMax > 1 ? 'playback ' + (sMin === sMax ? this.speedLabel(sMax) : this.speedLabel(sMin) + '–' + this.speedLabel(sMax)) + ' by clip length' : '1× speed';   // stable: 3/6 tiles first, then 2/6, then 1/6, wall order within each group
+    const speedRange = sMax > 1 ? 'playback ' + (sMin === sMax ? this.speedLabel(sMax) : this.speedLabel(sMin) + '–' + this.speedLabel(sMax)) + ' by clip length' : '1× speed';   
     const nG1 = rollAll.filter((t) => t.emb === 'G1-OP').length, nG2 = rollAll.length - nG1;
     const rollCollapsed = !this.state.rollOpen;
     const rollTiles = rollCollapsed ? rollAll.slice(0, 9) : rollAll;
@@ -5084,15 +4966,15 @@ class Component extends DCLogic {
           style: 'display: flex; gap: 8px; align-items: center; font-size: 13px; line-height: 1.3; padding: 4px 8px 4px 5px; border-radius: 6px; transition: background 320ms ease, opacity 320ms ease; ' + (k === cue ? 'background: oklch(0.500 0.195 265 / 0.92);' : k < cue ? 'opacity: 0.55;' : 'opacity: 0.85;'),
           numStyle: "flex: none; width: 18px; height: 18px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; " + (k === cue ? 'background: oklch(0.985 0.002 250); color: oklch(0.330 0.150 268);' : 'background: oklch(0.985 0.002 250 / 0.25); color: oklch(0.985 0.002 250);') }))
       });
-      const segs = d.cues.map((c, k) => { const end = k + 1 < d.cues.length ? d.cues[k + 1].t : d.dur; const bg = k < cue ? 'oklch(0.777 0.079 265)' : k === cue ? 'oklch(0.500 0.195 265)' : 'oklch(0.90 0.005 250)'; return { style: 'flex: 1 1 0; height: 4px; border-radius: 2px; background: ' + bg + '; transition: background 320ms ease;' }; /* equal segments, one per command (user) */ });
+      const segs = d.cues.map((c, k) => { const end = k + 1 < d.cues.length ? d.cues[k + 1].t : d.dur; const bg = k < cue ? 'oklch(0.777 0.079 265)' : k === cue ? 'oklch(0.500 0.195 265)' : 'oklch(0.90 0.005 250)'; return { style: 'flex: 1 1 0; height: 4px; border-radius: 2px; background: ' + bg + '; transition: background 320ms ease;' };   });
       return { one: [v], segs, caption: base.caption, ...this.chipSet(d.emb, this.RATE['demos/' + d.slug] || 1) };
     });
-    const lhRowsAll = this.lhRows(); const lhCueIdx = Math.min(this.state.lhCue || 0, this.LH.cues.length - 1); const lhCue = Math.max(0, lhRowsAll.findIndex((r) => r.idx.indexOf(lhCueIdx) >= 0)); const lhMerged = !!this.state.lhMerged; // resting state = the four steps; the merged card only after they play through
+    const lhRowsAll = this.lhRows(); const lhCueIdx = Math.min(this.state.lhCue || 0, this.LH.cues.length - 1); const lhCue = Math.max(0, lhRowsAll.findIndex((r) => r.idx.indexOf(lhCueIdx) >= 0)); const lhMerged = !!this.state.lhMerged; 
     const lhOne = [Object.assign({}, this.video('demos/' + this.LH.slug), { onTime: this.lhTime, onEnded: this.lhEnded, onReadyLh: this.lhReady })];
     const lhSteps = lhRowsAll.map((c, k) => { const done = k < lhCue || lhMerged, on = k === lhCue && !lhMerged; return { n: done ? '\u2713' : String(k + 1), text: c.text, onClick: this.lhSeek(c.t),
       style: '--i: ' + k + '; display: flex; gap: 10px; align-items: center; font-size: 15px; line-height: 1.35; padding: 8px 11px 8px 8px; border-radius: 8px; cursor: pointer; transition: background 320ms ease, opacity 320ms ease, color 320ms ease, transform 420ms cubic-bezier(.2,.7,.2,1); ' + (on ? 'background: oklch(0.905 0.060 262); color: oklch(0.330 0.150 268);' : done ? 'opacity: 0.55; color: oklch(0.3 0.008 255);' : 'opacity: 0.8; color: oklch(0.3 0.008 255);'),
       numStyle: "flex: none; width: 20px; height: 20px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: 11px; " + (on ? 'background: oklch(0.993 0.002 250); color: oklch(0.330 0.150 268);' : done ? 'background: transparent; color: oklch(0.500 0.195 265); font-size: 13px;' : 'background: oklch(0.255 0.008 255 / 0.12); color: oklch(0.3 0.008 255);') }; });
-    const lhSegs = lhRowsAll.map((c, k) => { const bg = k < lhCue || lhMerged ? 'oklch(0.777 0.079 265)' : k === lhCue ? 'oklch(0.500 0.195 265)' : 'oklch(0.90 0.005 250)'; return { style: 'flex: 1 1 0; height: 4px; border-radius: 2px; background: ' + bg + '; transition: background 320ms ease;' }; });   // equal segments, one per command
+    const lhSegs = lhRowsAll.map((c, k) => { const bg = k < lhCue || lhMerged ? 'oklch(0.777 0.079 265)' : k === lhCue ? 'oklch(0.500 0.195 265)' : 'oklch(0.90 0.005 250)'; return { style: 'flex: 1 1 0; height: 4px; border-radius: 2px; background: ' + bg + '; transition: background 320ms ease;' }; });   
     const lhChips = this.chipSet(this.LH.emb, this.RATE['demos/' + this.LH.slug] || 1);
     const light = this.state.light ? this.video(this.state.light) : null;
     if (light && !light.fam && this.RATE[this.state.light]) light.meta = (this.state.light === 'demos/sort_cubes_by_colour_g2' ? 'G2-90D' : 'G1-OP') + ' \u00b7 ' + this.speedLabel(this.RATE[this.state.light]) + ' \u00b7 AUTONOMOUS \u00b7 ZERO-SHOT';
