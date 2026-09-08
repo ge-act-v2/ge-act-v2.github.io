@@ -3065,17 +3065,16 @@
   [data-r="root"] { overflow-x: clip; }
   [data-r="dd-menu"] { display: none; }
   [data-r="dd"]:hover [data-r="dd-menu"], [data-r="dd"]:focus-within [data-r="dd-menu"] { display: block; }
-    [data-r="dd-menu"] { z-index: 40; }   /* above the section bar that hangs under the header */
-  /* left rail only when it fits at full size beside the 1000 px column (viewport >= 1480 px); narrower than that the rail is
-     hidden and the section bar under the header takes over (no squeezed rail: the user found it too small) */
+    [data-r="dd-menu"] { z-index: 40; }   
+  
   @media (max-width: 1479px) { [data-r="toc"] { display: none !important; } }
-  /* narrow screens: the section links become a bar under the header once the reader has scrolled past the hero */
+  
   [data-r="topnav"] { display: none !important; }
   [data-r="topnav"]::-webkit-scrollbar { display: none; }
   @media (max-width: 1479px) { [data-r="topnav"][data-show="1"] { display: flex !important; } }
   section[id], [id="task-wall"], [id="svp"], [id="wall"] { scroll-margin-top: 90px; }
-    @media (max-width: 1479px) { section[id], [id="task-wall"], [id="svp"], [id="wall"] { scroll-margin-top: 104px; } }   /* anchors land below the bar */
-  @media (min-width: 900px) { [data-r="topnav"] { overflow: visible !important; } }   /* room for the Method hover menu; below 900 px the bar scrolls sideways instead */
+    @media (max-width: 1479px) { section[id], [id="task-wall"], [id="svp"], [id="wall"] { scroll-margin-top: 104px; } }   
+  @media (min-width: 900px) { [data-r="topnav"] { overflow: visible !important; } }   
   [data-r="topnav"] a:hover { color: oklch(0.215 0.008 255) !important; }
   [data-r="topnav"] a[data-on="1"] { color: oklch(0.500 0.195 265) !important; background: oklch(0.968 0.020 262); }
   [data-r="toc"] { opacity: 0; visibility: hidden; transition: opacity 240ms ease, visibility 240ms ease; }
@@ -3089,12 +3088,12 @@
   @media (max-width: 960px) { [data-r="lh"] { grid-template-columns: minmax(0, 1fr) !important; } }
     @media (max-width: 900px) { [data-r="hero-stats"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; row-gap: 18px; } [data-r="hero-tile"]:nth-child(3) { border-left: 0 !important; } }
     @media (max-width: 520px) { [data-r="hero-stats"] { grid-template-columns: minmax(0, 1fr) !important; } [data-r="hero-tile"] { border-left: 0 !important; padding-left: 0 !important; } }
-    @media (max-width: 720px) { [data-r="cards3"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px 10px !important; } [data-r="cards2"][data-cols="3"] { grid-template-columns: minmax(0, 1fr) !important; } }   /* object tiles + bias cards keep 3 columns down to 720 px */   /* narrow tablets: panel under the video, the goal card needs the width */
+    @media (max-width: 720px) { [data-r="cards3"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px 10px !important; } [data-r="cards2"][data-cols="3"] { grid-template-columns: minmax(0, 1fr) !important; } }      
   [data-r="strip"]::-webkit-scrollbar { height: 6px; } [data-r="strip"]::-webkit-scrollbar-thumb { background: oklch(0.86 0.008 250); border-radius: 3px; }
   @media (max-width: 1100px) { [data-r="strip"][data-open="1"] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
   @media (max-width: 720px) { [data-r="strip-tile"] { flex-basis: 236px !important; } [data-r="strip"][data-open="1"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 14px 10px !important; } }
   [data-r="roll-nav"] button:disabled { background: oklch(0.92 0.006 250) !important; color: oklch(0.7 0.008 255) !important; cursor: default !important; }
-  /* data-paths diagram: on phones it keeps its three-column geometry and scrolls sideways, like the method figures */
+  
   @media (max-width: 720px) { [data-r="datapaths"] { overflow-x: auto; padding: 20px 16px 22px !important; } [data-r="datapaths-in"] { min-width: 760px; } }
   @media (max-width: 1100px) {   }
   @media (max-width: 1100px) { [data-r="roll"] { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } [data-r="wall-cols"] { columns: 2 240px !important; } [data-r="wall-pick"] { grid-template-columns: minmax(0, 1fr) !important; } }
@@ -3108,7 +3107,7 @@
   details > summary::-webkit-details-marker { display: none; }
   details[open] > summary [data-chev] { transform: rotate(180deg); }
   @media (max-width: 720px) { [data-r="hero-stats"] { gap: 18px 0 !important; } [data-r="hero-stats"] > div { flex: 1 1 50%; } }
-  /* --- responsive layer: tablet --- */
+  
   @media (max-width: 1100px) {
     section, header, footer { padding-left: 32px !important; padding-right: 32px !important; }
     [data-r="nav"] { gap: 18px !important; }
@@ -3117,7 +3116,7 @@
     [data-r="cite-grid"] { grid-template-columns: minmax(0, 1fr) !important; gap: 32px !important; }
     [data-r="cards4"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   }
-  /* --- responsive layer: phone --- */
+  
   @media (max-width: 720px) {
     section, header, footer { padding-left: 20px !important; padding-right: 20px !important; }
     section { padding-top: 72px !important; }
@@ -3127,7 +3126,7 @@
     [data-r="hero-sub"] { font-size: 18px !important; max-width: 100% !important; }
     h2 { font-size: 26px !important; }
     p[style*="font-size: 18px"] { font-size: 17px !important; }
-    [data-r="cards2"], [data-r="checklist-grid"] { grid-template-columns: minmax(0, 1fr) !important; }   /* cards3 (object tiles) stays 2-up on phones */
+    [data-r="cards2"], [data-r="checklist-grid"] { grid-template-columns: minmax(0, 1fr) !important; }   
     [data-r="cards4"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
     [data-r="wall"], [data-r="lang"] { padding: 22px 18px 24px !important; }
     [data-r="wall-cols"] { columns: 1 !important; }
@@ -3146,7 +3145,7 @@
   @media (max-width: 880px) {
     [data-scene-group="four-object"] { border-left: none !important; padding-left: 0 !important; }
   }
-  [data-r="cue"] { display: flex; align-items: flex-start; gap: 9px; min-height: 40px; }   /* two lines reserved: a longer command must not reflow the card mid-clip */
+  [data-r="cue"] { display: flex; align-items: flex-start; gap: 9px; min-height: 40px; }   
   [data-r="cue"] > [data-r="cue-bar"] { flex: none; width: 3px; height: 15px; margin-top: 2.5px; border-radius: 2px; background: oklch(0.500 0.195 265); }
   [data-r="cue"] > [data-r="cue-text"] { font-size: 14.5px; line-height: 1.35; font-weight: 500; color: oklch(0.26 0.008 255); }
   [data-r="cue"][data-k="cancel"] > [data-r="cue-bar"] { background: oklch(0.58 0.22 27); }
@@ -3180,7 +3179,7 @@
   @keyframes sweepPass { 0% { left: -46%; opacity: 0; } 9% { opacity: 0.95; } 52% { opacity: 0.95; } 70%, 100% { left: 104%; opacity: 0; } }
   @keyframes stalkFlow { from { background-position: 0 0; } to { background-position: 0 -16px; } }
   @keyframes kasoRing { 0% { transform: scale(1); opacity: 0.85; } 100% { transform: scale(1.07); opacity: 0; } }
-  /* hero film: the control bar overlays the picture and shows on hover, on keyboard focus, or while paused; touch screens keep it visible */
+  
   [data-r="film-bar"] { opacity: 0; transition: opacity 0.22s ease; }
     [data-r="film-play"][data-on="1"] { opacity: 1 !important; }
   [data-r="film"]:hover [data-r="film-bar"], [data-r="film"]:focus-within [data-r="film-bar"], [data-r="film-bar"][data-paused="1"] { opacity: 1; }
